@@ -2,10 +2,11 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Footer from '@/components/blog/Footer';
+import { siteConfig } from '@/content/config';
 
 export const metadata: Metadata = {
-  title: 'Andrew M. | Crafting the Future of UI/UX Design',
-  description: 'A blog by Andrew Mitchell about UI/UX design, tutorials, and insights.',
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({

@@ -1,8 +1,7 @@
-'use client';
-
+import { notFound } from 'next/navigation';
+import { getAllPosts, getPostBySlug } from '@/lib/mdx';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
-import Link from 'next/link';
-
 import Header from '@/components/blog/Header';
 import Sidebar from '@/components/blog/Sidebar';
 import { Separator } from '@/components/ui/separator';
@@ -12,52 +11,30 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedIconWrapper } from '@/components/ui/animated-icon';
+import Link from 'next/link';
+import { siteConfig } from '@/content/config';
+import { format } from 'date-fns';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
+import { useMDXComponents } from '../../../../mdx-components';
 
-const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-    </svg>
-);
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map(post => ({ slug: post.slug }));
+}
 
-const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-    </svg>
-);
-
-const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-  </svg>
-);
-
-
-// Mock data for a single post
-const post = {
-  title: 'Human-Centered Design Principles',
-  author: 'Liam Bennett',
-  date: 'May 29, 2025',
-  category: 'UX Strategy',
-  imageUrl: 'https://placehold.co/800x450.png',
-  imageHint: 'woman user experience design',
-  comments: [
-    {
-      id: 1,
-      author: 'Nina Patal',
-      avatarUrl: 'https://placehold.co/40x40.png',
-      date: 'May 30, 2025',
-      text: 'This article made me rethink how I run user interviews. Thank you!',
-      reply: {
-        id: 2,
-        author: 'Liam Bennett',
-        isAuthor: true,
-        avatarUrl: 'https://placehold.co/40x40.png',
-        date: 'May 31, 2025',
-        text: 'Glad to hear that, Nina! Listening deeply to users can transform your designs.',
-      },
-    },
-  ],
-};
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug);
+  if (!post) {
+    return {};
+  }
+  return {
+    title: post.frontmatter.title,
+    description: post.frontmatter.description,
+  };
+}
 
 const CommentForm = () => (
   <div className="mt-12">
@@ -83,49 +60,75 @@ const CommentForm = () => (
   </div>
 );
 
-const CommentsSection = ({ comments }: { comments: typeof post.comments }) => (
-  <div className="mt-12">
-    <h3 className="text-xl font-bold mb-6">Comments ({comments.length})</h3>
-    <div className="space-y-8">
-      {comments.map((comment) => (
-        <div key={comment.id}>
-          <div className="flex items-start gap-4">
-            <Avatar>
-              <AvatarImage src={comment.avatarUrl} alt={comment.author} data-ai-hint="woman portrait" />
-              <AvatarFallback>{comment.author.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold">{comment.author}</span>
-                <span className="text-xs text-muted-foreground">{comment.date}</span>
-              </div>
-              <p className="text-muted-foreground mt-1">{comment.text}</p>
-            </div>
-          </div>
-          {comment.reply && (
-            <div className="ml-10 mt-6 flex items-start gap-4">
+const CommentsSection = ({ comments }: { comments: any[] }) => (
+    <div className="mt-12">
+      <h3 className="text-xl font-bold mb-6">Comments ({comments.length})</h3>
+      <div className="space-y-8">
+        {comments.map((comment) => (
+          <div key={comment.id}>
+            <div className="flex items-start gap-4">
               <Avatar>
-                <AvatarImage src={comment.reply.avatarUrl} alt={comment.reply.author} data-ai-hint="man portrait" />
-                <AvatarFallback>{comment.reply.author.charAt(0)}</AvatarFallback>
+                <AvatarImage src={comment.avatarUrl} alt={comment.author} data-ai-hint="woman portrait" />
+                <AvatarFallback>{comment.author.charAt(0)}</AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold">{comment.reply.author} <span className="text-xs font-normal text-muted-foreground">(Author)</span></span>
-                  <span className="text-xs text-muted-foreground">{comment.reply.date}</span>
+                  <span className="font-semibold">{comment.author}</span>
+                  <span className="text-xs text-muted-foreground">{comment.date}</span>
                 </div>
-                <p className="text-muted-foreground mt-1">{comment.reply.text}</p>
+                <p className="text-muted-foreground mt-1">{comment.text}</p>
               </div>
             </div>
-          )}
-        </div>
-      ))}
+            {comment.reply && (
+              <div className="ml-10 mt-6 flex items-start gap-4">
+                <Avatar>
+                  <AvatarImage src={comment.reply.avatarUrl} alt={comment.reply.author} data-ai-hint="man portrait" />
+                  <AvatarFallback>{comment.reply.author.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">{comment.reply.author} <span className="text-xs font-normal text-muted-foreground">(Author)</span></span>
+                    <span className="text-xs text-muted-foreground">{comment.reply.date}</span>
+                  </div>
+                  <p className="text-muted-foreground mt-1">{comment.reply.text}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  // In a real app, you would fetch post data based on the slug
-  // const post = await getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug);
+  const components = useMDXComponents({});
+
+  if (!post) {
+    notFound();
+  }
+  
+  const { frontmatter, content } = post;
+  const { author, blog: blogConfig } = siteConfig;
+
+  // Mock comments for now
+  const comments = [
+    {
+      id: 1,
+      author: 'Nina Patal',
+      avatarUrl: 'https://placehold.co/40x40.png',
+      date: 'May 30, 2025',
+      text: 'This article made me rethink how I run user interviews. Thank you!',
+      reply: {
+        id: 2,
+        author: author.name,
+        isAuthor: true,
+        avatarUrl: author.avatar,
+        date: 'May 31, 2025',
+        text: 'Glad to hear that, Nina! Listening deeply to users can transform your designs.',
+      },
+    },
+  ];
 
   return (
     <div className="bg-background text-foreground">
@@ -142,20 +145,24 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <article>
               <header>
                 <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
-                  {post.title}
+                  {frontmatter.title}
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">calendar_month</span>
-                    <span>{post.date}</span>
+                    <span>{format(new Date(frontmatter.date), 'MMM dd, yyyy')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">person</span>
-                    <span>{post.author}</span>
+                    <span>{frontmatter.author}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">folder</span>
-                    <span>{post.category}</span>
+                    <span>{frontmatter.category}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base">schedule</span>
+                    <span>{frontmatter.readingTime}</span>
                   </div>
                 </div>
               </header>
@@ -166,104 +173,50 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 transition={{ duration: 0.3 }}
               >
                 <Image
-                  src={post.imageUrl}
-                  alt={post.title}
+                  src={frontmatter.imageUrl}
+                  alt={frontmatter.title}
                   fill
                   className="object-cover"
-                  data-ai-hint={post.imageHint}
+                  data-ai-hint={frontmatter.imageHint}
                   priority
                 />
               </MotionDiv>
 
-              <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
-                <p>
-                  At the heart of every successful product lies a simple truth: users
-                  matter. Human-centered design (HCD) puts users at the core of the
-                  design process, ensuring that interfaces are intuitive, accessible,
-                  and tailored to real-world needs.
-                </p>
-                <h2 className="text-2xl lg:text-3xl font-bold !mt-10 !mb-4 text-foreground">
-                  What is Human-Centered Design?
-                </h2>
-                <p>
-                  HCD is an iterative framework that starts with understanding users’
-                  pain points and ends with solutions that solve real problems. It’s
-                  not a single step—it’s a mindset.
-                </p>
-                <h2 className="text-2xl lg:text-3xl font-bold !mt-10 !mb-4 text-foreground">
-                  The Three Pillars of HCD
-                </h2>
-                <ul className="list-disc pl-6 space-y-3">
-                  <li>
-                    <strong>Empathy</strong>: Step into your users' shoes. Understand
-                    their environment, tasks, and frustrations.
-                  </li>
-                  <li>
-                    <strong>Ideation</strong>: Brainstorm freely, test often, and validate
-                    ideas quickly.
-                  </li>
-                  <li>
-                    <strong>Iteration</strong>: Feedback is gold. Revise your designs based
-                    on real input.
-                  </li>
-                </ul>
-                <p>
-                  When applied effectively, HCD doesn’t just make interfaces
-                  better—it makes them meaningful.
-                </p>
-                <blockquote className="border-l-4 border-primary pl-6 my-8 italic text-foreground/80">
-                  “Design is not just what it looks like. Design is how it
-                  works—with empathy.” — Liam Bennett
-                </blockquote>
-                <h2 className="text-2xl lg:text-3xl font-bold !mt-10 !mb-4 text-foreground">
-                  Tools & Techniques
-                </h2>
-                <p>
-                  Wireframes, user journey maps, empathy maps, and personas are some
-                  of the most common tools. But what matters most is the connection
-                  between designer and user.
-                </p>
-                <h2 className="text-2xl lg:text-3xl font-bold !mt-10 !mb-4 text-foreground">
-                  HCD in Agile Environments
-                </h2>
-                <p>
-                  In agile workflows, human-centered design aligns beautifully with
-                  sprints. Rapid feedback loops and continuous learning fit perfectly
-                  into design cycles.
-                </p>
-                <p>
-                  Want to bring empathy into your next project? Reach out and let’s
-                  build something users will love.
-                </p>
-                <p className="!mt-2">— Liam Bennett, UI/UX Strategist</p>
+              <div className="prose prose-invert max-w-none text-base lg:text-lg text-muted-foreground">
+                <MDXRemote 
+                    source={content} 
+                    components={components}
+                    options={{
+                        mdxOptions: {
+                            remarkPlugins: [remarkGfm],
+                            rehypePlugins: [
+                                rehypeSlug,
+                                [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+                                [rehypePrettyCode, { theme: 'one-dark-pro' }]
+                            ],
+                        },
+                    }}
+                />
               </div>
 
               <Separator className="my-8" />
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h3 className="text-lg font-bold">Share this post</h3>
+                <h3 className="text-lg font-bold">{blogConfig.sharePostText}</h3>
                 <div className="flex items-center gap-1">
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href="#" className="flex items-center gap-2">
-                      <AnimatedIconWrapper><LinkedinIcon /></AnimatedIconWrapper> LinkedIn
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href="#" className="flex items-center gap-2">
-                      <AnimatedIconWrapper><TwitterIcon /></AnimatedIconWrapper> Twitter
-                    </Link>
-                  </Button>
-                   <Button variant="ghost" size="sm" asChild>
-                    <Link href="#" className="flex items-center gap-2">
-                      <AnimatedIconWrapper><FacebookIcon /></AnimatedIconWrapper> Facebook
-                    </Link>
-                  </Button>
+                  {blogConfig.shareLinks.map(link => (
+                    <Button key={link.name} variant="ghost" size="sm" asChild>
+                      <Link href={link.url} className="flex items-center gap-2">
+                        <AnimatedIconWrapper><span className="material-symbols-outlined !w-4 !h-4">{link.icon}</span></AnimatedIconWrapper> {link.name}
+                      </Link>
+                    </Button>
+                  ))}
                 </div>
               </div>
 
               <Separator className="my-8" />
               
-              <CommentsSection comments={post.comments} />
+              <CommentsSection comments={comments} />
 
               <CommentForm />
             </article>

@@ -7,12 +7,7 @@ import { Button } from '@/components/ui/button';
 import { MotionDiv, MotionLink } from '@/components/blog/Motion';
 import { cn } from '@/lib/utils';
 import { AnimatedMaterialIcon } from '../ui/animated-icon';
-
-const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About Me', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-];
+import { siteConfig } from '@/content/config';
 
 const Header = () => {
   const pathname = usePathname();
@@ -31,11 +26,11 @@ const Header = () => {
             whileHover={{ scale: 1.05, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            Andrew M.
+            {siteConfig.author.name.split(' ')[0]} M.
           </MotionLink>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
+            {siteConfig.navLinks.map((link) => (
               <MotionLink
                 key={link.name}
                 href={link.href}

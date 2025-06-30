@@ -1,0 +1,86 @@
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import readingTime from 'reading-time';
+
+const postsDirectory = path.join(process.cwd(), 'src', 'content', 'blog');
+
+export type PostFrontmatter = {
+  title: string;
+  date: string;
+  description: string;
+  imageUrl: string;
+  imageHint: string;
+  category: string;
+  author: string;
+  tags: string[];
+  readingTime: string;
+};
+
+export type Post = {
+  slug: string;
+  frontmatter: PostFrontmatter;
+  content: string;
+};
+
+function getMdxFiles() {
+  return fs.readdirSync(postsDirectory).filter(file => path.extname(file) === '.mdx');
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+  
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  const stats = readingTime(content);
+
+  return {
+    slug,
+    frontmatter: {
+      ...(data as Omit<PostFrontmatter, 'readingTime'>),
+      readingTime: stats.text,
+    },
+    content,
+  };
+}
+
+export async function getAllPosts(): Promise<Post[]> {
+  const mdxFiles = getMdxFiles();
+  
+  const allPostsData = await Promise.all(
+    mdxFiles.map(async (fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '');
+      const post = await getPostBySlug(slug);
+      return post;
+    })
+  );
+
+  const validPosts = allPostsData.filter((post): post is Post => post !== null);
+
+  return validPosts.sort((postA, postB) =>
+    new Date(postB.frontmatter.date).getTime() - new Date(postA.frontmatter.date).getTime()
+  );
+}
+
+export async function getCategories(): Promise<Record<string, number>> {
+    const posts = await getAllPosts();
+    const categories: Record<string, number> = {};
+    posts.forEach(post => {
+        const category = post.frontmatter.category;
+        categories[category] = (categories[category] || 0) + 1;
+    });
+    return categories;
+}
+
+export async function getTags(): Promise<string[]> {
+    const posts = await getAllPosts();
+    const tagSet = new Set<string>();
+    posts.forEach(post => {
+        post.frontmatter.tags?.forEach(tag => tagSet.add(tag));
+    });
+    return Array.from(tagSet);
+}
