@@ -7,6 +7,7 @@ import { AnimatedIconWrapper } from '../ui/animated-icon';
 import { siteConfig } from '@/content/config';
 import { getAllPosts, getCategories, getTags } from '@/lib/mdx';
 import { format } from 'date-fns';
+import { slugify } from '@/lib/utils';
 
 const AuthorWidget = () => {
     const { author } = siteConfig;
@@ -50,7 +51,7 @@ const CategoriesWidget = async () => {
             <ul className="space-y-2 text-sm">
                 {Object.entries(categories).map(([name, count]) => (
                 <li key={name} className="flex justify-between">
-                    <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">{name}</Link>
+                    <Link href={`/category/${slugify(name)}`} className="text-muted-foreground hover:text-primary transition-colors">{name}</Link>
                     <span className="text-muted-foreground">{count}</span>
                 </li>
                 ))}
@@ -70,9 +71,11 @@ const TagsWidget = async () => {
             <CardContent>
             <div className="flex flex-wrap gap-2">
                 {tags.map(tag => (
-                <Badge key={tag} variant="outline" className="cursor-pointer hover:bg-accent font-normal">
-                    {tag}
-                </Badge>
+                  <Link key={tag} href={`/tag/${slugify(tag)}`}>
+                    <Badge variant="outline" className="cursor-pointer hover:bg-accent font-normal">
+                        {tag}
+                    </Badge>
+                  </Link>
                 ))}
             </div>
             </CardContent>

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
+import { slugify } from './utils';
 
 const postsDirectory = path.join(process.cwd(), 'src', 'content', 'blog');
 
@@ -83,4 +84,16 @@ export async function getTags(): Promise<string[]> {
         post.frontmatter.tags?.forEach(tag => tagSet.add(tag));
     });
     return Array.from(tagSet);
+}
+
+export async function getPostsByCategory(categorySlug: string): Promise<Post[]> {
+  const allPosts = await getAllPosts();
+  return allPosts.filter(post => slugify(post.frontmatter.category) === categorySlug);
+}
+
+export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
+  const allPosts = await getAllPosts();
+  return allPosts.filter(post => 
+    post.frontmatter.tags.some(tag => slugify(tag) === tagSlug)
+  );
 }

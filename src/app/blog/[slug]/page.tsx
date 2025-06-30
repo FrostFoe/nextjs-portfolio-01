@@ -19,6 +19,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { useMDXComponents } from '../../../../mdx-components';
+import { slugify } from '@/lib/utils';
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -158,7 +159,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">folder</span>
-                    <span>{frontmatter.category}</span>
+                    <Link href={`/category/${slugify(frontmatter.category)}`} className="hover:text-primary transition-colors">
+                      {frontmatter.category}
+                    </Link>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-base">schedule</span>
