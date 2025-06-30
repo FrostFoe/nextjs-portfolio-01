@@ -1,19 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { MotionDiv, MotionLink } from '@/components/blog/Motion';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'About Me', href: '#' },
+  { name: 'About Me', href: '/about' },
   { name: 'Contact', href: '#' },
   { name: 'Categories', href: '#' },
   { name: 'Gallery', href: '#' },
 ];
 
 const Header = () => {
+  const pathname = usePathname();
+
   return (
     <MotionDiv
       initial={{ y: -100, opacity: 0 }}
@@ -36,7 +40,10 @@ const Header = () => {
               <MotionLink
                 key={link.name}
                 href={link.href}
-                className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                className={cn(
+                  "rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-primary",
+                  pathname === link.href ? "text-primary" : "text-muted-foreground"
+                )}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 1 }}
               >
