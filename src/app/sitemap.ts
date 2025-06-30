@@ -14,21 +14,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.frontmatter.date),
     changeFrequency: 'weekly',
     priority: 0.8,
-  })) as MetadataRoute.Sitemap;
+  }));
 
   const categoryUrls = Object.keys(categories).map(category => ({
     url: `${siteUrl}/category/${slugify(category)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.6,
-  })) as MetadataRoute.Sitemap;
+  }));
 
   const tagUrls = tags.map(tag => ({
     url: `${siteUrl}/tag/${slugify(tag)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.6,
-  })) as MetadataRoute.Sitemap;
+  }));
 
   const staticUrls = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
