@@ -10,11 +10,9 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'About Me', href: '#' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '#' },
     { name: 'Contact', href: '#' },
-    { name: 'Categories', href: '#' },
-    { name: 'Gallery', href: '#' },
   ];
 
   return (
@@ -43,9 +41,14 @@ const Header = () => {
           </Button>
         </div>
 
-        <div className="md:hidden">
+        <div className="flex items-center md:hidden">
+          <Button variant="ghost" size="icon">
+            <Search className="h-5 w-5 text-muted-foreground" />
+            <span className="sr-only">Search</span>
+          </Button>
           <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <span className="sr-only">Toggle menu</span>
           </Button>
         </div>
       </div>
@@ -55,24 +58,20 @@ const Header = () => {
         className={cn(
           "md:hidden",
           isOpen ? "block" : "hidden",
-          "border-t border-border/40 bg-background"
+          "absolute w-full border-t border-border/40 bg-background"
         )}
       >
-        <div className="container mx-auto flex flex-col items-center gap-4 px-4 py-8">
+        <div className="container mx-auto flex flex-col items-start gap-4 px-4 py-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="w-full text-center text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="w-full rounded-md px-4 py-2 text-lg font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-primary"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <Button variant="ghost" size="icon" className="mt-4">
-            <Search className="h-6 w-6 text-muted-foreground" />
-            <span className="sr-only">Search</span>
-          </Button>
         </div>
       </div>
     </header>

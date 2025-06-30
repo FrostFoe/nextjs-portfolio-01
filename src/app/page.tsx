@@ -1,5 +1,4 @@
-import Header from '@/components/landing/Header';
-import Hero from '@/components/landing/Hero';
+import Header from '@/components/blog/Header';
 import PostCard from '@/components/blog/PostCard'; 
 import Sidebar from '@/components/blog/Sidebar'; 
 import Pagination from '@/components/blog/Pagination';
@@ -60,12 +59,18 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      <Hero />
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12">
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
+              Andrew's Blog
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+              Insights, tutorials, and stories about creating user-centered digital experiences.
+            </p>
+          </div>
           <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-3 lg:gap-x-12">
             <div className="lg:col-span-2">
-              <h2 className="mb-8 text-3xl font-bold tracking-tight">Latest Posts</h2>
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                 {posts.map((post) => (
                   <PostCard key={post.slug} {...post} />
@@ -73,7 +78,7 @@ export default function Home() {
               </div>
               <Pagination />
             </div>
-            <div className="lg:col-span-1 lg:pt-[76px]">
+            <div className="lg:col-span-1">
               <Sidebar />
             </div>
           </div>
