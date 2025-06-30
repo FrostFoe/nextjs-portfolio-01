@@ -267,10 +267,20 @@ export default async function BlogPostPage({
               </div>
 
               <Separator className="my-8" />
-
-              <CommentsSection comments={[]} />
-
-              <CommentForm />
+              <MotionDiv
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
+                <CommentsSection comments={[]} />
+              </MotionDiv>
+              <MotionDiv
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                <CommentForm />
+              </MotionDiv>
             </article>
           </MotionDiv>
 

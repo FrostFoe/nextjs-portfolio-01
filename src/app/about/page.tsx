@@ -119,8 +119,9 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true, amount: 0.5 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
-                <Card className="h-full text-center">
+                <Card className="h-full text-center hover:shadow-primary/20">
                   <CardContent className="p-8">
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
                       <AnimatedMaterialIcon

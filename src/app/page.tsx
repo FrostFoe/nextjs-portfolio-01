@@ -27,19 +27,29 @@ export default async function Home() {
               {homeConfig.hero.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button size="lg" asChild>
-                <a href={homeConfig.hero.buttons.primary.url}>
-                  {homeConfig.hero.buttons.primary.text}{" "}
-                  <AnimatedMaterialIcon
-                    iconName="arrow_forward"
-                    className="ml-2"
-                  />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline">
-                <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" />{" "}
-                {homeConfig.hero.buttons.secondary.text}
-              </Button>
+              <MotionDiv
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Button size="lg" asChild>
+                  <a href={homeConfig.hero.buttons.primary.url}>
+                    {homeConfig.hero.buttons.primary.text}{" "}
+                    <AnimatedMaterialIcon
+                      iconName="arrow_forward"
+                      className="ml-2"
+                    />
+                  </a>
+                </Button>
+              </MotionDiv>
+              <MotionDiv
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Button size="lg" variant="outline">
+                  <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" />{" "}
+                  {homeConfig.hero.buttons.secondary.text}
+                </Button>
+              </MotionDiv>
             </div>
           </MotionDiv>
           <MotionDiv

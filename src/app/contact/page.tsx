@@ -38,6 +38,21 @@ const formSchema = z.object({
   }),
 });
 
+const staggerContainer = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 export default function ContactPage() {
   const { contact: contactConfig, author } = siteConfig;
   const { toast } = useToast();
@@ -85,86 +100,102 @@ export default function ContactPage() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
-              >
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your Name"
-                            {...field}
-                            className="bg-background/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your Email"
-                            {...field}
-                            className="bg-background/50"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Subject</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Subject"
-                          {...field}
-                          className="bg-background/50"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Your Message"
-                          className="min-h-[150px] bg-background/50"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="text-center">
-                  <Button type="submit" size="lg">
-                    <AnimatedMaterialIcon iconName="send" className="mr-2" />
-                    {contactConfig.form.buttonText}
-                  </Button>
-                </div>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <MotionDiv
+                  className="space-y-8"
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                >
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <MotionDiv variants={itemVariant}>
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Your Name"
+                                {...field}
+                                className="bg-background/50"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </MotionDiv>
+                    <MotionDiv variants={itemVariant}>
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Your Email"
+                                {...field}
+                                className="bg-background/50"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </MotionDiv>
+                  </div>
+                  <MotionDiv variants={itemVariant}>
+                    <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Subject</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Subject"
+                              {...field}
+                              className="bg-background/50"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </MotionDiv>
+                  <MotionDiv variants={itemVariant}>
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Your Message"
+                              className="min-h-[150px] bg-background/50"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </MotionDiv>
+                  <MotionDiv variants={itemVariant} className="text-center">
+                    <Button type="submit" size="lg">
+                      <AnimatedMaterialIcon
+                        iconName="send"
+                        className="mr-2"
+                      />
+                      {contactConfig.form.buttonText}
+                    </Button>
+                  </MotionDiv>
+                </MotionDiv>
               </form>
             </Form>
           </MotionDiv>
