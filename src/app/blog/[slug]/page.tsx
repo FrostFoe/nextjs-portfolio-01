@@ -118,7 +118,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   return (
     <div className="bg-background text-foreground">
       <Header />
-      <main className="container mx-auto px-4 py-12 lg:py-16">
+      <div className="container mx-auto px-4 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Main Content */}
           <MotionDiv 
@@ -267,7 +267,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <Sidebar />
           </MotionDiv>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
