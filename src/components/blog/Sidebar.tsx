@@ -3,102 +3,130 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Linkedin, Twitter, Dribbble, Rss } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Rss } from 'lucide-react';
+import { MotionDiv } from './Motion';
 
 const AboutWidget = () => (
   <Card>
     <CardContent className="p-6 text-center">
-      <Avatar className="mx-auto h-24 w-24 border-2 border-primary/20">
-        <AvatarImage src="https://placehold.co/100x100.png" alt="Andrew Mitchell" data-ai-hint="man portrait"/>
-        <AvatarFallback>AM</AvatarFallback>
-      </Avatar>
+      <MotionDiv
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
+        <Avatar className="mx-auto h-24 w-24 border-2 border-primary/20">
+          <AvatarImage
+            src="https://placehold.co/100x100.png"
+            alt="Andrew Mitchell"
+            data-ai-hint="man portrait"
+          />
+          <AvatarFallback>AM</AvatarFallback>
+        </Avatar>
+      </MotionDiv>
       <h3 className="mt-4 text-xl font-bold">Andrew Mitchell</h3>
       <p className="mt-2 text-sm text-muted-foreground">
-        UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights.
+        UI/UX designer crafting digital magic. Also, a big fan of pizza.
       </p>
-      <div className="mt-4 flex justify-center gap-4">
-        <Link href="#" className="text-muted-foreground hover:text-primary"><Linkedin size={18} /></Link>
-        <Link href="#" className="text-muted-foreground hover:text-primary"><Dribbble size={18} /></Link>
-        <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter size={18} /></Link>
-        <Link href="#" className="text-muted-foreground hover:text-primary"><Rss size={18} /></Link>
-      </div>
     </CardContent>
   </Card>
 );
 
-const CategoriesWidget = () => {
-    const categories = [
-        { name: 'UX Strategy', count: 2 },
-        { name: 'Design Insights', count: 2 },
-        { name: 'Accessibility', count: 1 },
-        { name: 'Design Systems', count: 2 },
-        { name: 'UX Research', count: 1 },
-    ];
-    return (
-        <Card>
-            <CardHeader><CardTitle className="text-lg">Categories</CardTitle></CardHeader>
-            <CardContent>
-                <ul className="space-y-3">
-                    {categories.map(cat => (
-                        <li key={cat.name} className="flex justify-between text-sm">
-                            <Link href="#" className="text-muted-foreground hover:text-primary">{cat.name}</Link>
-                            <span className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">{cat.count}</span>
-                        </li>
-                    ))}
-                </ul>
-            </CardContent>
-        </Card>
-    );
-};
-
-const TagsWidget = () => {
-    const tags = ['Accessibility', 'Design Systems', 'Scalability', 'Microinteractions', 'Dark Mode', 'Global UX', 'HCD', 'Design Thinking', 'Animation', 'Motion Design', 'User Research'];
-    return (
-        <Card>
-            <CardHeader><CardTitle className="text-lg">Tags</CardTitle></CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-                {tags.map(tag => (
-                    <Badge key={tag} variant="outline" className="cursor-pointer border-border hover:bg-accent text-muted-foreground hover:text-foreground">{tag}</Badge>
-                ))}
-            </CardContent>
-        </Card>
-    );
-}
+const NewsletterWidget = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2 text-lg">
+        <Rss />
+        Stay Updated
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p className="mb-4 text-sm text-muted-foreground">
+        Get the latest articles, projects, and pizza topping recommendations
+        delivered to your inbox.
+      </p>
+      <form className="flex gap-2">
+        <Input type="email" placeholder="you@domain.com" className="flex-1" />
+        <Button type="submit">Subscribe</Button>
+      </form>
+    </CardContent>
+  </Card>
+);
 
 const PopularPostsWidget = () => {
-    const posts = [
-        { title: 'Human-Centered Design Principles', date: 'May 29, 2025', image: 'https://placehold.co/80x80.png', hint: 'abstract design' },
-        { title: 'Microinteractions and User Feedback', date: 'May 27, 2025', image: 'https://placehold.co/80x80.png', hint: 'ui elements' },
-        { title: 'The Evolution of UI/UX Design in the Future', date: 'May 31, 2025', image: 'https://placehold.co/80x80.png', hint: 'futuristic interface' },
-    ];
-    return (
-        <Card>
-            <CardHeader><CardTitle className="text-lg">Popular Posts</CardTitle></CardHeader>
-            <CardContent>
-                <ul className="space-y-4">
-                    {posts.map(post => (
-                        <li key={post.title} className="flex items-center gap-4">
-                            <Image src={post.image} alt={post.title} width={64} height={64} className="rounded-md object-cover" data-ai-hint={post.hint}/>
-                            <div>
-                                <Link href="#" className="text-sm font-semibold leading-tight hover:text-primary">{post.title}</Link>
-                                <p className="mt-1 text-xs text-muted-foreground">{post.date}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </CardContent>
-        </Card>
-    );
-}
+  const posts = [
+    {
+      title: 'The Unseen Hand: How AI is Shaping the Future of UX',
+      image: 'https://placehold.co/80x80.png',
+      hint: 'abstract design',
+    },
+    {
+      title: 'Storytelling in Design: Crafting Narratives That Convert',
+      image: 'https://placehold.co/80x80.png',
+      hint: 'ui elements',
+    },
+    {
+      title: '10 Hilarious Moments in Bad UX Design',
+      image: 'https://placehold.co/80x80.png',
+      hint: 'funny error message',
+    },
+  ];
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-lg">Trending Posts</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="space-y-4">
+          {posts.map((post) => (
+            <MotionDiv
+              key={post.title}
+              whileHover={{
+                scale: 1.03,
+                backgroundColor: 'hsla(var(--accent))',
+              }}
+              className="rounded-lg p-2 -m-2"
+              transition={{ duration: 0.2 }}
+            >
+              <li className="flex items-center gap-4">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={64}
+                  height={64}
+                  className="rounded-md object-cover"
+                  data-ai-hint={post.hint}
+                />
+                <div>
+                  <Link
+                    href="#"
+                    className="font-semibold leading-tight hover:text-primary"
+                  >
+                    {post.title}
+                  </Link>
+                </div>
+              </li>
+            </MotionDiv>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Sidebar = () => {
   return (
-    <aside className="space-y-8">
+    <MotionDiv
+      className="space-y-8"
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <AboutWidget />
-      <CategoriesWidget />
-      <TagsWidget />
+      <NewsletterWidget />
       <PopularPostsWidget />
-    </aside>
+    </MotionDiv>
   );
 };
 
