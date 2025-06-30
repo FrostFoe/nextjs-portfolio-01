@@ -131,25 +131,7 @@ export default async function BlogPostPage({
   }
 
   const { frontmatter, content, slug } = post;
-  const { author, blog: blogConfig } = siteConfig;
-
-  const comments = [
-    {
-      id: 1,
-      author: "Nina Patal",
-      avatarUrl: "https://placehold.co/40x40.png",
-      date: "May 30, 2025",
-      text: "This article made me rethink how I run user interviews. Thank you!",
-      reply: {
-        id: 2,
-        author: author.name,
-        isAuthor: true,
-        avatarUrl: author.avatar,
-        date: "May 31, 2025",
-        text: "Glad to hear that, Nina! Listening deeply to users can transform your designs.",
-      },
-    },
-  ];
+  const { blog: blogConfig } = siteConfig;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -286,7 +268,7 @@ export default async function BlogPostPage({
 
               <Separator className="my-8" />
 
-              <CommentsSection comments={comments} />
+              <CommentsSection comments={[]} />
 
               <CommentForm />
             </article>
