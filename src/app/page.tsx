@@ -7,6 +7,16 @@ import { MotionDiv } from '@/components/blog/Motion';
 
 const posts = [
   {
+    slug: 'human-centered-design-principles',
+    title: 'Human-Centered Design Principles',
+    date: 'May 29, 2025',
+    description:
+      'A deep dive into the core principles of HCD, exploring how empathy, ideation, and iteration lead to products people love.',
+    imageUrl: 'https://placehold.co/600x400.png',
+    imageHint: 'user experience design',
+    category: 'UX Strategy',
+  },
+  {
     slug: 'ai-driven-ux',
     title: 'The Unseen Hand: How AI is Shaping the Future of UX',
     date: 'Jun 10, 2025',

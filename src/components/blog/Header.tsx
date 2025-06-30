@@ -6,10 +6,11 @@ import { Search } from 'lucide-react';
 import { MotionDiv, MotionLink } from '@/components/blog/Motion';
 
 const navLinks = [
-  { name: 'Articles', href: '#' },
-  { name: 'Projects', href: '#' },
-  { name: 'About', href: '#' },
+  { name: 'Home', href: '/' },
+  { name: 'About Me', href: '#' },
   { name: 'Contact', href: '#' },
+  { name: 'Categories', href: '#' },
+  { name: 'Gallery', href: '#' },
 ];
 
 const Header = () => {
@@ -49,7 +50,6 @@ const Header = () => {
               <Search className="h-5 w-5 text-muted-foreground" />
               <span className="sr-only">Search</span>
             </Button>
-            <Button className="hidden sm:inline-flex">Get In Touch</Button>
           </div>
         </div>
       </header>
