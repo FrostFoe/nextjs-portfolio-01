@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays } from 'lucide-react';
 import { MotionDiv, MotionLink } from '@/components/blog/Motion';
 
 type PostCardProps = {
@@ -54,7 +53,7 @@ const PostCard = ({
             </MotionDiv>
           </h3>
           <div className="mb-4 flex items-center text-sm text-muted-foreground">
-            <CalendarDays className="mr-2 h-4 w-4" />
+            <span className="material-symbols-outlined mr-2 text-base">calendar_month</span>
             <span>{date}</span>
           </div>
           <p className="text-muted-foreground">{description}</p>

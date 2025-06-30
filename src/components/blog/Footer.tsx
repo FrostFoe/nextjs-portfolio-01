@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { MotionDiv } from '@/components/blog/Motion';
+import { AnimatedMaterialIcon } from '../ui/animated-icon';
 
 const Footer = () => {
   return (
@@ -33,7 +33,7 @@ const Footer = () => {
                 aria-label="Your Email"
               />
               <Button type="submit" size="lg" className="w-full sm:w-auto h-12">
-                <Mail className="mr-2 h-5 w-5" /> Subscribe
+                <AnimatedMaterialIcon iconName="mail" className="mr-2" /> Subscribe
               </Button>
             </form>
           </div>

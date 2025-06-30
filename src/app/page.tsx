@@ -2,8 +2,8 @@ import Header from '@/components/blog/Header';
 import PostCard from '@/components/blog/PostCard';
 import Sidebar from '@/components/blog/Sidebar';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Rss } from 'lucide-react';
 import { MotionDiv } from '@/components/blog/Motion';
+import { AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 
 const posts = [
   {
@@ -60,11 +60,11 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Button size="lg" asChild>
                 <a href="#">
-                  My Work <ArrowRight className="ml-2" />
+                  My Work <AnimatedMaterialIcon iconName="arrow_forward" className="ml-2" />
                 </a>
               </Button>
               <Button size="lg" variant="outline">
-                <Rss className="mr-2" /> Subscribe
+                <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" /> Subscribe
               </Button>
             </div>
           </MotionDiv>

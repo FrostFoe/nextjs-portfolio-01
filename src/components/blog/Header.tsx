@@ -4,9 +4,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
 import { MotionDiv, MotionLink } from '@/components/blog/Motion';
 import { cn } from '@/lib/utils';
+import { AnimatedMaterialIcon } from '../ui/animated-icon';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -53,7 +53,7 @@ const Header = () => {
 
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5 text-muted-foreground" />
+                <AnimatedMaterialIcon iconName="search" className="text-muted-foreground" />
               <span className="sr-only">Search</span>
             </Button>
           </div>

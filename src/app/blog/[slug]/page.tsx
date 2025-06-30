@@ -2,14 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Calendar,
-  User,
-  Folder,
-  Linkedin,
-  Twitter,
-  Facebook,
-} from 'lucide-react';
 
 import Header from '@/components/blog/Header';
 import Sidebar from '@/components/blog/Sidebar';
@@ -19,6 +11,26 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { MotionDiv } from '@/components/blog/Motion';
+import { AnimatedIconWrapper } from '@/components/ui/animated-icon';
+
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+    </svg>
+);
+
+const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+    </svg>
+);
+
+const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+  </svg>
+);
+
 
 // Mock data for a single post
 const post = {
@@ -134,15 +146,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                    <span className="material-symbols-outlined text-base">calendar_month</span>
                     <span>{post.date}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
+                    <span className="material-symbols-outlined text-base">person</span>
                     <span>{post.author}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Folder className="h-4 w-4" />
+                    <span className="material-symbols-outlined text-base">folder</span>
                     <span>{post.category}</span>
                   </div>
                 </div>
@@ -232,18 +244,18 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 <h3 className="text-lg font-bold">Share this post</h3>
                 <div className="flex items-center gap-1">
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href="#">
-                      <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
+                    <Link href="#" className="flex items-center gap-2">
+                      <AnimatedIconWrapper><LinkedinIcon /></AnimatedIconWrapper> LinkedIn
                     </Link>
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href="#">
-                      <Twitter className="h-4 w-4 mr-2" /> Twitter
+                    <Link href="#" className="flex items-center gap-2">
+                      <AnimatedIconWrapper><TwitterIcon /></AnimatedIconWrapper> Twitter
                     </Link>
                   </Button>
                    <Button variant="ghost" size="sm" asChild>
-                    <Link href="#">
-                      <Facebook className="h-4 w-4 mr-2" /> Facebook
+                    <Link href="#" className="flex items-center gap-2">
+                      <AnimatedIconWrapper><FacebookIcon /></AnimatedIconWrapper> Facebook
                     </Link>
                   </Button>
                 </div>

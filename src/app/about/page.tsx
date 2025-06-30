@@ -2,14 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Linkedin,
-  Twitter,
-  Check,
-  MonitorSmartphone,
-  Smartphone,
-  Palette,
-} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -22,6 +14,19 @@ import Header from '@/components/blog/Header';
 import { Separator } from '@/components/ui/separator';
 import { MotionDiv } from '@/components/blog/Motion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
+
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+    </svg>
+);
+
+const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+    </svg>
+);
 
 const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -36,19 +41,19 @@ const BehanceIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const services = [
   {
-    icon: MonitorSmartphone,
+    icon: 'devices',
     title: 'UI/UX Design',
     description: 'Creating intuitive interfaces and seamless user experiences that convert visitors into loyal customers.',
     items: ['User Research & Analysis', 'Wireframing & Prototyping', 'Visual Design & Branding'],
   },
   {
-    icon: Smartphone,
+    icon: 'smartphone',
     title: 'Mobile App Design',
     description: 'Designing native and cross-platform mobile applications that provide exceptional user experiences.',
     items: ['iOS & Android Design', 'Interactive Prototypes', 'App Store Optimization'],
   },
   {
-    icon: Palette,
+    icon: 'palette',
     title: 'Brand Identity',
     description: 'Developing cohesive brand identities that resonate with your target audience and stand out in the market.',
     items: ['Logo & Brand Design', 'Brand Guidelines', 'Marketing Materials'],
@@ -102,9 +107,9 @@ export default function AboutPage() {
             expertise in creating intuitive interfaces.
           </p>
           <div className="mt-6 flex justify-center gap-6 text-muted-foreground">
-            <Link href="#" className="transition-colors hover:text-primary"><Linkedin className="h-6 w-6" /></Link>
-            <Link href="#" className="transition-colors hover:text-primary"><BehanceIcon className="h-6 w-6" /></Link>
-            <Link href="#" className="transition-colors hover:text-primary"><Twitter className="h-6 w-6" /></Link>
+            <Link href="#" className="transition-colors hover:text-primary"><AnimatedIconWrapper><LinkedinIcon className="h-6 w-6" /></AnimatedIconWrapper></Link>
+            <Link href="#" className="transition-colors hover:text-primary"><AnimatedIconWrapper><BehanceIcon className="h-6 w-6" /></AnimatedIconWrapper></Link>
+            <Link href="#" className="transition-colors hover:text-primary"><AnimatedIconWrapper><TwitterIcon className="h-6 w-6" /></AnimatedIconWrapper></Link>
           </div>
         </MotionDiv>
 
@@ -173,14 +178,14 @@ export default function AboutPage() {
                 <Card className="h-full text-center">
                   <CardContent className="p-8">
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <service.icon className="h-6 w-6 text-primary" />
+                      <AnimatedMaterialIcon iconName={service.icon} className="text-primary text-3xl" />
                     </div>
                     <h3 className="mt-6 text-xl font-bold">{service.title}</h3>
                     <p className="mt-2 text-muted-foreground">{service.description}</p>
                     <ul className="mt-6 space-y-3 text-left">
                       {service.items.map((item) => (
                         <li key={item} className="flex items-start">
-                          <Check className="mr-3 h-5 w-5 flex-shrink-0 text-primary" />
+                          <span className="material-symbols-outlined mr-3 h-5 w-5 flex-shrink-0 text-primary">check</span>
                           <span className="text-muted-foreground">{item}</span>
                         </li>
                       ))}
