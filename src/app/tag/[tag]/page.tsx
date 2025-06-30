@@ -5,6 +5,14 @@ import { MotionDiv } from '@/components/blog/Motion';
 import { getPostsByTag, getTags } from '@/lib/mdx';
 import { slugify } from '@/lib/utils';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { siteConfig } from '@/content/config';
+
+type TagPageProps = {
+  params: {
+    tag: string;
+  };
+};
 
 export async function generateStaticParams() {
   const tags = await getTags();
@@ -13,7 +21,37 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function TagPage({ params }: { params: { tag: string } }) {
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+    const { tag } = params;
+    const allTags = await getTags();
+    const originalTag = allTags.find(t => slugify(t) === tag);
+
+    if (!originalTag) {
+        return {};
+    }
+
+    const title = `Posts tagged: "${originalTag}"`;
+    const description = `Explore all articles tagged with ${originalTag} on ${siteConfig.author.name}'s blog.`;
+
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: `/tag/${tag}`,
+        },
+        openGraph: {
+            title,
+            description,
+            url: `${siteConfig.url}/tag/${tag}`,
+        },
+        twitter: {
+            title,
+            description,
+        },
+    };
+}
+
+export default async function TagPage({ params }: TagPageProps) {
   const { tag } = params;
   const posts = await getPostsByTag(tag);
   const allTags = await getTags();

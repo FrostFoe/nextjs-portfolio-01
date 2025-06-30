@@ -19,6 +19,7 @@ import { useMDXComponents } from '../../../../mdx-components';
 import { slugify } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
 
 const CommentFormLoader = () => (
   <div className="mt-12">
@@ -67,14 +68,45 @@ export async function generateStaticParams() {
   return posts.map(post => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   if (!post) {
     return {};
   }
+
+  const { frontmatter } = post;
+  const postUrl = `${siteConfig.url}/blog/${params.slug}`;
+  const imageUrl = frontmatter.imageUrl.startsWith('http') ? frontmatter.imageUrl : `${siteConfig.url}${frontmatter.imageUrl}`;
+
   return {
-    title: post.frontmatter.title,
-    description: post.frontmatter.description,
+    title: frontmatter.title,
+    description: frontmatter.description,
+    keywords: frontmatter.tags,
+    alternates: {
+      canonical: postUrl,
+    },
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      url: postUrl,
+      type: 'article',
+      publishedTime: new Date(frontmatter.date).toISOString(),
+      authors: [siteConfig.author.name],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: frontmatter.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -86,7 +118,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     notFound();
   }
   
-  const { frontmatter, content } = post;
+  const { frontmatter, content, slug } = post;
   const { author, blog: blogConfig } = siteConfig;
 
   // Mock comments for now
@@ -108,8 +140,35 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     },
   ];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontmatter.title,
+    datePublished: new Date(frontmatter.date).toISOString(),
+    dateModified: new Date(frontmatter.date).toISOString(),
+    description: frontmatter.description,
+    image: frontmatter.imageUrl.startsWith('http') ? frontmatter.imageUrl : `${siteConfig.url}${frontmatter.imageUrl}`,
+    url: `${siteConfig.url}/blog/${slug}`,
+    author: {
+      '@type': 'Person',
+      name: frontmatter.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.author.name.split(' ')[0],
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url}/logo.png`, // You should create a logo.png
+      },
+    },
+  };
+
   return (
     <div className="bg-background text-foreground">
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <div className="container mx-auto px-4 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">

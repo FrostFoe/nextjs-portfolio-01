@@ -5,6 +5,14 @@ import { MotionDiv } from '@/components/blog/Motion';
 import { getCategories, getPostsByCategory } from '@/lib/mdx';
 import { slugify } from '@/lib/utils';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { siteConfig } from '@/content/config';
+
+type CategoryPageProps = {
+  params: {
+    category: string;
+  };
+};
 
 export async function generateStaticParams() {
   const categories = await getCategories();
@@ -13,7 +21,38 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { category } = params;
+  const allCategories = await getCategories();
+  const originalCategory = Object.keys(allCategories).find(c => slugify(c) === category);
+
+  if (!originalCategory) {
+    return {};
+  }
+
+  const title = `Posts in category: "${originalCategory}"`;
+  const description = `Browse all articles filed under the category ${originalCategory} on ${siteConfig.author.name}'s blog.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/category/${category}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${siteConfig.url}/category/${category}`,
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+}
+
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
   const posts = await getPostsByCategory(category);
   const allCategories = await getCategories();

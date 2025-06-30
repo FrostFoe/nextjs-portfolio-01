@@ -16,6 +16,21 @@ import { MotionDiv } from '@/components/blog/Motion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 import { siteConfig } from '@/content/config';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About Me',
+    description: siteConfig.about.intro,
+    openGraph: {
+        title: 'About Me',
+        description: siteConfig.about.intro,
+        url: `${siteConfig.url}/about`,
+    },
+    twitter: {
+        title: 'About Me',
+        description: siteConfig.about.intro,
+    },
+};
 
 export default function AboutPage() {
   const { author, about } = siteConfig;

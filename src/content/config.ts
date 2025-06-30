@@ -1,6 +1,8 @@
 export const siteConfig = {
   title: 'Andrew M. | Crafting the Future of UI/UX Design',
-  description: 'A blog by Andrew Mitchell about UI/UX design, tutorials, and insights.',
+  description: 'Explore insightful articles and tutorials on UI/UX design, front-end development, and modern web technologies by Andrew Mitchell.',
+  url: 'https://your-awesome-blog.com', // Replace with your actual domain
+  keywords: ['UI/UX Design', 'Web Development', 'React', 'Next.js', 'Framer Motion', 'Design Systems'],
   
   author: {
     name: 'Andrew Mitchell',

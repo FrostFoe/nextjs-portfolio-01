@@ -20,6 +20,21 @@ import Header from '@/components/blog/Header';
 import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 import { siteConfig } from '@/content/config';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: siteConfig.contact.description,
+    openGraph: {
+        title: 'Contact',
+        description: siteConfig.contact.description,
+        url: `${siteConfig.url}/contact`,
+    },
+    twitter: {
+        title: 'Contact',
+        description: siteConfig.contact.description,
+    },
+};
 
 const formSchema = z.object({
   name: z.string().min(2, {
