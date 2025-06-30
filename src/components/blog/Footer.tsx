@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
-import { AnimatedMaterialIcon } from "../ui/animated-icon";
 import { siteConfig } from "@/content/config";
+import { Mail } from "lucide-react";
 
 const Footer = () => {
   const { footer, author } = siteConfig;
@@ -35,7 +35,7 @@ const Footer = () => {
                 aria-label="Your Email"
               />
               <Button type="submit" size="lg" className="w-full sm:w-auto h-12">
-                <AnimatedMaterialIcon iconName="mail" className="mr-2" />{" "}
+                <Mail className="mr-2 h-4 w-4" />{" "}
                 {footer.newsletter.buttonText}
               </Button>
             </form>

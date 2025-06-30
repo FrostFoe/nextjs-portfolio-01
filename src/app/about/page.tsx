@@ -13,11 +13,29 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { MotionDiv } from "@/components/blog/Motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  AnimatedIconWrapper,
-  AnimatedMaterialIcon,
-} from "@/components/ui/animated-icon";
 import { siteConfig } from "@/content/config";
+import {
+  Check,
+  Laptop,
+  Linkedin,
+  Palette,
+  Smartphone,
+  Twitter,
+  Dribbble,
+} from "lucide-react";
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Linkedin,
+  Palette,
+  Twitter,
+  Dribbble,
+};
+
+const serviceIconMap: { [key: string]: React.ElementType } = {
+  Laptop,
+  Smartphone,
+  Palette,
+};
 
 export default function AboutPage() {
   const { author, about } = siteConfig;
@@ -46,19 +64,23 @@ export default function AboutPage() {
             {about.intro}
           </p>
           <div className="mt-6 flex justify-center gap-6 text-muted-foreground">
-            {author.social.map((social) => (
-              <Link
-                key={social.name}
-                href={social.url}
-                className="transition-colors hover:text-primary"
-              >
-                <AnimatedIconWrapper>
-                  <span className="material-symbols-outlined">
-                    {social.icon}
-                  </span>
-                </AnimatedIconWrapper>
-              </Link>
-            ))}
+            {author.social.map((social) => {
+              const Icon = iconMap[social.icon];
+              return (
+                <Link
+                  key={social.name}
+                  href={social.url}
+                  className="transition-colors hover:text-primary"
+                >
+                  <MotionDiv
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {Icon && <Icon className="h-6 w-6" />}
+                  </MotionDiv>
+                </Link>
+              );
+            })}
           </div>
         </MotionDiv>
 
@@ -112,41 +134,45 @@ export default function AboutPage() {
             {about.servicesSection.title}
           </h2>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {about.services.map((service, i) => (
-              <MotionDiv
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true, amount: 0.5 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <Card className="h-full text-center hover:shadow-primary/20">
-                  <CardContent className="p-8">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <AnimatedMaterialIcon
-                        iconName={service.icon}
-                        className="text-primary text-3xl"
-                      />
-                    </div>
-                    <h3 className="mt-6 text-xl font-bold">{service.title}</h3>
-                    <p className="mt-2 text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <ul className="mt-6 space-y-3 text-left">
-                      {service.items.map((item) => (
-                        <li key={item} className="flex items-start">
-                          <span className="material-symbols-outlined mr-3 h-5 w-5 flex-shrink-0 text-primary">
-                            check
-                          </span>
-                          <span className="text-muted-foreground">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </MotionDiv>
-            ))}
+            {about.services.map((service, i) => {
+              const ServiceIcon = serviceIconMap[service.icon];
+              return (
+                <MotionDiv
+                  key={service.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                >
+                  <Card className="h-full text-center hover:shadow-primary/20">
+                    <CardContent className="p-8">
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
+                        {ServiceIcon && (
+                          <ServiceIcon className="text-primary h-7 w-7" />
+                        )}
+                      </div>
+                      <h3 className="mt-6 text-xl font-bold">
+                        {service.title}
+                      </h3>
+                      <p className="mt-2 text-muted-foreground">
+                        {service.description}
+                      </p>
+                      <ul className="mt-6 space-y-3 text-left">
+                        {service.items.map((item) => (
+                          <li key={item} className="flex items-start">
+                            <Check className="mr-3 h-5 w-5 flex-shrink-0 text-primary" />
+                            <span className="text-muted-foreground">
+                              {item}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </MotionDiv>
+              );
+            })}
           </div>
         </MotionDiv>
 

@@ -1,11 +1,13 @@
 import PostCard from "@/components/blog/PostCard";
-import Sidebar from "@/components/blog/Sidebar";
 import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
-import { AnimatedMaterialIcon } from "@/components/ui/animated-icon";
 import { siteConfig } from "@/content/config";
 import { getAllPosts } from "@/lib/mdx";
 import Image from "next/image";
+import { ArrowRight, Rss } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
 export default async function Home() {
   const posts = await getAllPosts();
@@ -34,10 +36,7 @@ export default async function Home() {
                 <Button size="lg" asChild>
                   <a href={homeConfig.hero.buttons.primary.url}>
                     {homeConfig.hero.buttons.primary.text}{" "}
-                    <AnimatedMaterialIcon
-                      iconName="arrow_forward"
-                      className="ml-2"
-                    />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </a>
                 </Button>
               </MotionDiv>
@@ -46,7 +45,7 @@ export default async function Home() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Button size="lg" variant="outline">
-                  <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" />{" "}
+                  <Rss className="mr-2 h-5 w-5" />{" "}
                   {homeConfig.hero.buttons.secondary.text}
                 </Button>
               </MotionDiv>

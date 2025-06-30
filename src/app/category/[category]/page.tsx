@@ -6,6 +6,9 @@ import { slugify } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
+import dynamic from "next/dynamic";
+
+const DynamicSidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
 type CategoryPageProps = {
   params: {
@@ -100,7 +103,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </div>
           </div>
           <div className="lg:col-span-1">
-            <Sidebar />
+            <DynamicSidebar />
           </div>
         </div>
       </div>

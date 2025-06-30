@@ -3,11 +3,19 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { AnimatedIconWrapper } from "../ui/animated-icon";
 import { siteConfig } from "@/content/config";
 import { getAllPosts, getCategories, getTags } from "@/lib/mdx";
 import { format } from "date-fns";
 import { slugify } from "@/lib/utils";
+import { Linkedin, Palette, Twitter, Dribbble } from "lucide-react";
+import { MotionDiv } from "./Motion";
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Linkedin,
+  Palette,
+  Twitter,
+  Dribbble,
+};
 
 const AuthorWidget = () => {
   const { author } = siteConfig;
@@ -25,19 +33,23 @@ const AuthorWidget = () => {
         <h3 className="mt-4 text-xl font-bold">{author.name}</h3>
         <p className="mt-2 text-sm text-muted-foreground">{author.bio}</p>
         <div className="mt-4 flex justify-center gap-4 text-muted-foreground">
-          {author.social.map((social) => (
-            <Link
-              key={social.name}
-              href={social.url}
-              className="hover:text-primary transition-colors"
-            >
-              <AnimatedIconWrapper>
-                <span className="material-symbols-outlined !w-5 !h-5">
-                  {social.icon}
-                </span>
-              </AnimatedIconWrapper>
-            </Link>
-          ))}
+          {author.social.map((social) => {
+            const Icon = iconMap[social.icon];
+            return (
+              <Link
+                key={social.name}
+                href={social.url}
+                className="hover:text-primary transition-colors"
+              >
+                <MotionDiv
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {Icon && <Icon className="h-5 w-5" />}
+                </MotionDiv>
+              </Link>
+            );
+          })}
         </div>
       </CardContent>
     </Card>

@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import { cn } from "@/lib/utils";
-import { AnimatedMaterialIcon } from "../ui/animated-icon";
 import { siteConfig } from "@/content/config";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import SearchDialog from "./SearchDialog";
 import type { Post } from "@/lib/mdx";
+import { Search } from "lucide-react";
 
 const Header = ({ posts }: { posts: Post[] }) => {
   const pathname = usePathname();
@@ -54,10 +54,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <AnimatedMaterialIcon
-                    iconName="search"
-                    className="text-muted-foreground"
-                  />
+                  <Search className="h-5 w-5 text-muted-foreground" />
                   <span className="sr-only">Search</span>
                 </Button>
               </DialogTrigger>

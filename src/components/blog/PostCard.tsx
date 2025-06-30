@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import type { Post } from "@/lib/mdx";
 import { format } from "date-fns";
+import { CalendarDays } from "lucide-react";
 
 type PostCardProps = {
   post: Post;
@@ -46,9 +47,7 @@ const PostCard = ({ post }: PostCardProps) => {
             </MotionDiv>
           </h3>
           <div className="mb-4 flex items-center text-sm text-muted-foreground">
-            <span className="material-symbols-outlined mr-2 text-base">
-              calendar_month
-            </span>
+            <CalendarDays className="mr-2 h-4 w-4" />
             <span>{format(new Date(frontmatter.date), "MMM dd, yyyy")}</span>
           </div>
           <p className="text-muted-foreground">{frontmatter.description}</p>

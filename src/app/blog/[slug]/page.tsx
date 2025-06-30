@@ -6,7 +6,6 @@ import Sidebar from "@/components/blog/Sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
-import { AnimatedIconWrapper } from "@/components/ui/animated-icon";
 import Link from "next/link";
 import { siteConfig } from "@/content/config";
 import { format } from "date-fns";
@@ -19,6 +18,21 @@ import { slugify } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Metadata } from "next";
+import {
+  CalendarDays,
+  User,
+  Folder,
+  Clock,
+  Linkedin,
+  Twitter,
+  Facebook,
+} from "lucide-react";
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Linkedin,
+  Twitter,
+  Facebook,
+};
 
 const CommentFormLoader = () => (
   <div className="mt-12">
@@ -179,23 +193,17 @@ export default async function BlogPostPage({
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base">
-                      calendar_month
-                    </span>
+                    <CalendarDays className="h-4 w-4" />
                     <span>
                       {format(new Date(frontmatter.date), "MMM dd, yyyy")}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base">
-                      person
-                    </span>
+                    <User className="h-4 w-4" />
                     <span>{frontmatter.author}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base">
-                      folder
-                    </span>
+                    <Folder className="h-4 w-4" />
                     <Link
                       href={`/category/${slugify(frontmatter.category)}`}
                       className="hover:text-primary transition-colors"
@@ -204,9 +212,7 @@ export default async function BlogPostPage({
                     </Link>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base">
-                      schedule
-                    </span>
+                    <Clock className="h-4 w-4" />
                     <span>{frontmatter.readingTime}</span>
                   </div>
                 </div>
@@ -251,18 +257,34 @@ export default async function BlogPostPage({
                   {blogConfig.sharePostText}
                 </h3>
                 <div className="flex items-center gap-1">
-                  {blogConfig.shareLinks.map((link) => (
-                    <Button key={link.name} variant="ghost" size="sm" asChild>
-                      <Link href={link.url} className="flex items-center gap-2">
-                        <AnimatedIconWrapper>
-                          <span className="material-symbols-outlined !w-4 !h-4">
-                            {link.icon}
-                          </span>
-                        </AnimatedIconWrapper>{" "}
-                        {link.name}
-                      </Link>
-                    </Button>
-                  ))}
+                  {blogConfig.shareLinks.map((link) => {
+                    const Icon = iconMap[link.icon];
+                    return (
+                      <Button
+                        key={link.name}
+                        variant="ghost"
+                        size="sm"
+                        asChild
+                      >
+                        <Link
+                          href={link.url}
+                          className="flex items-center gap-2"
+                        >
+                          <MotionDiv
+                            whileHover={{ scale: 1.1, rotate: -5 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 10,
+                            }}
+                          >
+                            {Icon && <Icon className="h-4 w-4" />}
+                          </MotionDiv>
+                          {link.name}
+                        </Link>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
 

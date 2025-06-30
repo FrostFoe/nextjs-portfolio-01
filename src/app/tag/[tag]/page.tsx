@@ -1,11 +1,13 @@
 import PostCard from "@/components/blog/PostCard";
-import Sidebar from "@/components/blog/Sidebar";
 import { MotionDiv } from "@/components/blog/Motion";
 import { getPostsByTag, getTags } from "@/lib/mdx";
 import { slugify } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
+import dynamic from "next/dynamic";
+
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
 type TagPageProps = {
   params: {

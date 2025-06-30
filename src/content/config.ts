@@ -18,10 +18,10 @@ export const siteConfig = {
     bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights.",
     email: "andrew.mitchell@example.com",
     social: [
-      { name: "LinkedIn", url: "#", icon: "group_work" },
-      { name: "Behance", url: "#", icon: "palette" },
-      { name: "Twitter", url: "#", icon: "gesture" },
-      { name: "Dribbble", url: "#", icon: "sports_basketball" },
+      { name: "LinkedIn", url: "#", icon: "Linkedin" },
+      { name: "Behance", url: "#", icon: "Palette" },
+      { name: "Twitter", url: "#", icon: "Twitter" },
+      { name: "Dribbble", url: "#", icon: "Dribbble" },
     ],
   },
 
@@ -56,9 +56,9 @@ export const siteConfig = {
   blog: {
     sharePostText: "Share this post",
     shareLinks: [
-      { name: "LinkedIn", url: "#", icon: "group_work" },
-      { name: "Twitter", url: "#", icon: "gesture" },
-      { name: "Facebook", url: "#", icon: "facebook" },
+      { name: "LinkedIn", url: "#", icon: "Linkedin" },
+      { name: "Twitter", url: "#", icon: "Twitter" },
+      { name: "Facebook", url: "#", icon: "Facebook" },
     ],
   },
 
@@ -83,7 +83,7 @@ export const siteConfig = {
     },
     services: [
       {
-        icon: "devices",
+        icon: "Laptop",
         title: "UI/UX Design",
         description:
           "Creating intuitive interfaces and seamless user experiences that convert visitors into loyal customers.",
@@ -94,7 +94,7 @@ export const siteConfig = {
         ],
       },
       {
-        icon: "smartphone",
+        icon: "Smartphone",
         title: "Mobile App Design",
         description:
           "Designing native and cross-platform mobile applications that provide exceptional user experiences.",
@@ -105,7 +105,7 @@ export const siteConfig = {
         ],
       },
       {
-        icon: "palette",
+        icon: "Palette",
         title: "Brand Identity",
         description:
           "Developing cohesive brand identities that resonate with your target audience and stand out in the market.",

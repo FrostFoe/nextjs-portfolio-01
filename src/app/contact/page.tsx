@@ -16,12 +16,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MotionDiv } from "@/components/blog/Motion";
-import {
-  AnimatedIconWrapper,
-  AnimatedMaterialIcon,
-} from "@/components/ui/animated-icon";
 import { siteConfig } from "@/content/config";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Send,
+  Mail,
+  Linkedin,
+  Palette,
+  Twitter,
+  Dribbble,
+} from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -51,6 +55,13 @@ const staggerContainer = {
 const itemVariant = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Linkedin,
+  Palette,
+  Twitter,
+  Dribbble,
 };
 
 export default function ContactPage() {
@@ -188,10 +199,7 @@ export default function ContactPage() {
                   </MotionDiv>
                   <MotionDiv variants={itemVariant} className="text-center">
                     <Button type="submit" size="lg">
-                      <AnimatedMaterialIcon
-                        iconName="send"
-                        className="mr-2"
-                      />
+                      <Send className="mr-2 h-4 w-4" />
                       {contactConfig.form.buttonText}
                     </Button>
                   </MotionDiv>
@@ -212,21 +220,34 @@ export default function ContactPage() {
                 href={`mailto:${author.email}`}
                 className="transition-colors hover:text-primary"
               >
-                <AnimatedMaterialIcon iconName="mail" />
-              </Link>
-              {author.social.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.url}
-                  className="transition-colors hover:text-primary"
+                <MotionDiv
+                  whileHover={{ scale: 1.2, y: -2, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <AnimatedIconWrapper>
-                    <span className="material-symbols-outlined !h-6 !w-6">
-                      {social.icon}
-                    </span>
-                  </AnimatedIconWrapper>
-                </Link>
-              ))}
+                  <Mail />
+                </MotionDiv>
+              </Link>
+              {author.social.map((social) => {
+                const Icon = iconMap[social.icon];
+                return (
+                  <Link
+                    key={social.name}
+                    href={social.url}
+                    className="transition-colors hover:text-primary"
+                  >
+                    <MotionDiv
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
+                    >
+                      {Icon && <Icon className="h-6 w-6" />}
+                    </MotionDiv>
+                  </Link>
+                );
+              })}
             </div>
           </MotionDiv>
         </div>

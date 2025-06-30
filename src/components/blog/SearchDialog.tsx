@@ -13,6 +13,7 @@ import {
 import type { Post } from "@/lib/mdx";
 import { format } from "date-fns";
 import { MotionDiv } from "./Motion";
+import { Search } from "lucide-react";
 
 export default function SearchDialog({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("");
@@ -42,9 +43,7 @@ export default function SearchDialog({ posts }: { posts: Post[] }) {
         </DialogDescription>
       </DialogHeader>
       <div className="relative">
-        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-          search
-        </span>
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
           type="search"
           placeholder="Type to search..."

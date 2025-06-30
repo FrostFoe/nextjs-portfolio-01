@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import Footer from "@/components/blog/Footer";
 import Header from "@/components/blog/Header";
 import { siteConfig } from "@/content/config";
 import { Inter } from "next/font/google";
 import { getAllPosts } from "@/lib/mdx";
+import dynamic from "next/dynamic";
+
+const Footer = dynamic(() => import("@/components/blog/Footer"));
 
 const inter = Inter({
   subsets: ["latin"],
@@ -64,12 +66,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} dark`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        />
-      </head>
+      <head />
       <body className="font-body bg-background text-foreground antialiased">
         <div className="flex flex-col min-h-screen">
           <Header posts={posts} />
