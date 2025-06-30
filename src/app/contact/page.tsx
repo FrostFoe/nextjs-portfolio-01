@@ -18,6 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 import { siteConfig } from '@/content/config';
+import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,6 +37,7 @@ const formSchema = z.object({
 
 export default function ContactPage() {
   const { contact: contactConfig, author } = siteConfig;
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,9 +49,13 @@ export default function ContactPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // This is where you would handle form submission
-    console.log(values);
-    // You could show a success toast here
+    // In a real app, you would handle form submission to a backend here.
+    // For demonstration, we'll just show a success toast and reset the form.
+    toast({
+      title: 'Message Sent! ✨',
+      description: "Thanks for reaching out. I'll get back to you soon.",
+    });
+    form.reset();
   }
 
   return (
