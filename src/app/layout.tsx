@@ -5,7 +5,7 @@ import Footer from '@/components/blog/Footer';
 import Header from '@/components/blog/Header';
 import { siteConfig } from '@/content/config';
 import { Inter } from 'next/font/google';
-import { NextRequest } from 'next/server';
+import { getAllPosts } from '@/lib/mdx';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -52,11 +52,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const posts = await getAllPosts();
+
   return (
     <html lang="en" className={`${inter.variable} dark`}>
       <head>
@@ -64,7 +66,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <div className="flex flex-col min-h-screen">
-          <Header />
+          <Header posts={posts} />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

@@ -8,8 +8,11 @@ import { MotionDiv, MotionLink } from '@/components/blog/Motion';
 import { cn } from '@/lib/utils';
 import { AnimatedMaterialIcon } from '../ui/animated-icon';
 import { siteConfig } from '@/content/config';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import SearchDialog from './SearchDialog';
+import type { Post } from '@/lib/mdx';
 
-const Header = () => {
+const Header = ({ posts }: { posts: Post[] }) => {
   const pathname = usePathname();
 
   return (
@@ -47,10 +50,17 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon">
-                <AnimatedMaterialIcon iconName="search" className="text-muted-foreground" />
-              <span className="sr-only">Search</span>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <AnimatedMaterialIcon iconName="search" className="text-muted-foreground" />
+                  <span className="sr-only">Search</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[625px]">
+                <SearchDialog posts={posts} />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </header>
