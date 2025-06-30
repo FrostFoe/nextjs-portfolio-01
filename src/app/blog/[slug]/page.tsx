@@ -5,9 +5,6 @@ import Image from 'next/image';
 import Header from '@/components/blog/Header';
 import Sidebar from '@/components/blog/Sidebar';
 import { Separator } from '@/components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedIconWrapper } from '@/components/ui/animated-icon';
@@ -20,6 +17,50 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { useMDXComponents } from '../../../../mdx-components';
 import { slugify } from '@/lib/utils';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const CommentFormLoader = () => (
+  <div className="mt-12">
+    <Skeleton className="h-7 w-48 mb-6" />
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <Skeleton className="h-32 w-full" />
+      <Skeleton className="h-12 w-36" />
+    </div>
+  </div>
+);
+
+const CommentsSectionLoader = () => (
+  <div className="mt-12">
+    <Skeleton className="h-7 w-40 mb-6" />
+    <div className="space-y-8">
+      {[...Array(2)].map((_, i) => (
+        <div key={i} className="flex items-start gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <div className="flex justify-between items-center">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-3 w-20" />
+            </div>
+            <Skeleton className="h-4 w-full" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const CommentForm = dynamic(() => import('@/components/blog/CommentForm'), {
+  loading: () => <CommentFormLoader />,
+});
+
+const CommentsSection = dynamic(() => import('@/components/blog/CommentsSection'), {
+  loading: () => <CommentsSectionLoader />,
+});
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -36,70 +77,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: post.frontmatter.description,
   };
 }
-
-const CommentForm = () => (
-  <div className="mt-12">
-    <h3 className="text-xl font-bold mb-6">Leave a Comment</h3>
-    <form className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Input
-          placeholder="Your Name"
-          className="bg-transparent border-0 border-b border-input rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary transition"
-        />
-        <Input
-          type="email"
-          placeholder="Your Email"
-          className="bg-transparent border-0 border-b border-input rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary transition"
-        />
-      </div>
-      <Textarea
-        placeholder="Your Comment"
-        className="bg-transparent border-0 border-b border-input rounded-none px-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-primary transition min-h-[120px]"
-      />
-      <Button type="submit">Post Comment</Button>
-    </form>
-  </div>
-);
-
-const CommentsSection = ({ comments }: { comments: any[] }) => (
-    <div className="mt-12">
-      <h3 className="text-xl font-bold mb-6">Comments ({comments.length})</h3>
-      <div className="space-y-8">
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <div className="flex items-start gap-4">
-              <Avatar>
-                <AvatarImage src={comment.avatarUrl} alt={comment.author} data-ai-hint="woman portrait" />
-                <AvatarFallback>{comment.author.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold">{comment.author}</span>
-                  <span className="text-xs text-muted-foreground">{comment.date}</span>
-                </div>
-                <p className="text-muted-foreground mt-1">{comment.text}</p>
-              </div>
-            </div>
-            {comment.reply && (
-              <div className="ml-10 mt-6 flex items-start gap-4">
-                <Avatar>
-                  <AvatarImage src={comment.reply.avatarUrl} alt={comment.reply.author} data-ai-hint="man portrait" />
-                  <AvatarFallback>{comment.reply.author.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">{comment.reply.author} <span className="text-xs font-normal text-muted-foreground">(Author)</span></span>
-                    <span className="text-xs text-muted-foreground">{comment.reply.date}</span>
-                  </div>
-                  <p className="text-muted-foreground mt-1">{comment.reply.text}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);

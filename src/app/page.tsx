@@ -6,6 +6,7 @@ import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 import { siteConfig } from '@/content/config';
 import { getAllPosts } from '@/lib/mdx';
+import Image from 'next/image';
 
 export default async function Home() {
   const posts = await getAllPosts();
@@ -46,11 +47,14 @@ export default async function Home() {
           >
             <div className="group relative">
               <div className="absolute -inset-2 rounded-xl bg-primary/20 opacity-0 blur-xl transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
-              <img
+              <Image
                 src={homeConfig.hero.image.src}
                 alt={homeConfig.hero.image.alt}
+                width={600}
+                height={400}
                 data-ai-hint={homeConfig.hero.image.hint}
                 className="relative rounded-2xl"
+                priority
               />
             </div>
           </MotionDiv>
