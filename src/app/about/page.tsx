@@ -10,7 +10,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import Header from '@/components/blog/Header';
 import { Separator } from '@/components/ui/separator';
 import { MotionDiv } from '@/components/blog/Motion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -37,7 +36,6 @@ export default function AboutPage() {
 
   return (
     <div className="bg-background text-foreground overflow-x-hidden">
-      <Header />
       <main className="container mx-auto max-w-5xl px-4 py-16 sm:py-24">
         <MotionDiv 
           className="text-center"

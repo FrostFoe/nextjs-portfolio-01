@@ -1,4 +1,3 @@
-import Header from '@/components/blog/Header';
 import PostCard from '@/components/blog/PostCard';
 import Sidebar from '@/components/blog/Sidebar';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,6 @@ export default async function Home() {
 
   return (
     <div className="bg-background font-sans text-foreground">
-      <Header />
       <section className="hero-bg-pattern border-b border-border/50">
         <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 py-20 lg:grid-cols-2 lg:py-32">
           <MotionDiv

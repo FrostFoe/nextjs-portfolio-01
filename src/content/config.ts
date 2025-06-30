@@ -131,11 +131,66 @@ export const siteConfig = {
         buttonText: 'Subscribe'
     },
     links: [
-        { name: 'Terms', url: '#' },
-        { name: 'Privacy', url: '#' },
-        { name: 'Docs', url: '#' },
-        { name: '404', url: '#' },
+        { name: 'Terms', url: '/terms' },
+        { name: 'Privacy', url: '/privacy' },
+        { name: 'Docs', url: '/docs' },
+        { name: '404', url: '/404' },
     ],
     copyright: '© {year} Andrew Mitchell. All rights reserved.'
+  },
+
+  termsPage: {
+    title: 'Terms of Service',
+    description: 'Our terms of service.',
+    content: [
+      {
+        heading: '1. Acceptance of Terms',
+        body: 'By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. In addition, when using this website’s particular services, you shall be subject to any posted guidelines or rules applicable to such services.'
+      },
+      {
+        heading: '2. Disclaimer of Warranties',
+        body: 'The site is provided "as is". My company and its suppliers and licensors hereby disclaim all warranties of any kind, express or implied, including, without limitation, the warranties of merchantability, fitness for a particular purpose and non-infringement.'
+      },
+      {
+        heading: '3. Limitation of Liability',
+        body: 'In no event will my company, or its suppliers or licensors, be liable with respect to any subject matter of this agreement under any contract, negligence, strict liability or other legal or equitable theory for: (i) any special, incidental or consequential damages; (ii) the cost of procurement for substitute products or services.'
+      }
+    ]
+  },
+
+  privacyPage: {
+    title: 'Privacy Policy',
+    description: 'How we handle your data.',
+    content: [
+        {
+          heading: 'Information We Collect',
+          body: 'We collect information you provide directly to us. For example, we collect information when you subscribe to a newsletter, fill out a form, or otherwise communicate with us. The types of information we may collect include your name, email address, and any other information you choose to provide.'
+        },
+        {
+          heading: 'How We Use Information',
+          body: 'We may use the information we collect to: provide, maintain, and improve our services; send you technical notices, updates, security alerts, and support and administrative messages; respond to your comments, questions, and requests and provide customer service; and communicate with you about products, services, offers, promotions, rewards, and events offered by us.'
+        },
+    ]
+  },
+
+  docsPage: {
+    title: 'Documentation',
+    description: 'Documentation for the site.',
+    content: [
+        {
+          heading: 'Getting Started',
+          body: 'This website is built with Next.js, Tailwind CSS, and MDX. It serves as a personal blog and portfolio. You can find all the code on GitHub.'
+        },
+        {
+          heading: 'Content Management',
+          body: 'All page content and blog posts are managed through files in the `/src/content` directory. The main site configuration is in `config.ts`, and blog posts are `.mdx` files in the `blog` subdirectory.'
+        },
+    ]
+  },
+
+  notFoundPage: {
+      title: '404 - Page Not Found',
+      description: "Oops! Looks like you've ventured into uncharted territory.",
+      buttonText: 'Go Back Home'
   }
 };

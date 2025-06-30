@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Footer from '@/components/blog/Footer';
+import Header from '@/components/blog/Header';
 import { siteConfig } from '@/content/config';
 import { Inter } from 'next/font/google';
 import { NextRequest } from 'next/server';
@@ -63,6 +64,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <div className="flex flex-col min-h-screen">
+          <Header />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

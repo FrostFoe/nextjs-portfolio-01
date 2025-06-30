@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import Header from '@/components/blog/Header';
 import { MotionDiv } from '@/components/blog/Motion';
 import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
 import { siteConfig } from '@/content/config';
@@ -71,7 +70,6 @@ export default function ContactPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <Header />
       <main className="hero-bg-pattern">
         <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-24">
           <MotionDiv

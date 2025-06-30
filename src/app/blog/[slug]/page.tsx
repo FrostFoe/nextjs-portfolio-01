@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
-import Header from '@/components/blog/Header';
 import Sidebar from '@/components/blog/Sidebar';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
@@ -169,7 +168,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
       <div className="container mx-auto px-4 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Main Content */}

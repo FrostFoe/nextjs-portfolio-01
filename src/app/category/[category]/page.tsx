@@ -1,4 +1,3 @@
-import Header from '@/components/blog/Header';
 import PostCard from '@/components/blog/PostCard';
 import Sidebar from '@/components/blog/Sidebar';
 import { MotionDiv } from '@/components/blog/Motion';
@@ -64,7 +63,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="bg-background font-sans text-foreground">
-      <Header />
       <div className="container mx-auto px-4 py-16 lg:py-24">
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
