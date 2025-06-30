@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Andrew M. | UI/UX Designer Blog',
+  title: 'Andrew M. | Crafting the Future of UI/UX Design',
   description: 'A blog by Andrew Mitchell about UI/UX design, tutorials, and insights.',
 };
 

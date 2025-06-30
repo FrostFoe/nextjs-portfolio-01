@@ -2,6 +2,8 @@ import Header from '@/components/blog/Header';
 import PostCard from '@/components/blog/PostCard'; 
 import Sidebar from '@/components/blog/Sidebar'; 
 import Pagination from '@/components/blog/Pagination';
+import { Button } from '@/components/ui/button';
+import { BriefcaseBusiness } from 'lucide-react';
 
 const posts = [
   {
@@ -54,24 +56,33 @@ const posts = [
   },
 ];
 
-
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
-        <div className="container mx-auto px-4 py-12">
-          <div className="mb-12 text-center">
+        <section className="hero-bg-pattern border-b border-border/50 py-20 md:py-32">
+          <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-              Andrew's Blog
+              Crafting the Future of UI/UX Design
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              Insights, tutorials, and stories about creating user-centered digital experiences.
+              Hi, I'm Andrew Mitchell, a UI/UX designer sharing insights, tutorials, and stories about creating user-centered digital experiences.
             </p>
+            <div className="mt-8">
+              <Button>
+                <BriefcaseBusiness className="mr-2 h-4 w-4" />
+                Hire Me
+              </Button>
+            </div>
           </div>
+        </section>
+
+        <div className="container mx-auto px-4 py-16">
+          <h2 className="mb-8 text-3xl font-bold">Latest Posts</h2>
           <div className="grid grid-cols-1 gap-y-12 lg:grid-cols-3 lg:gap-x-12">
             <div className="lg:col-span-2">
-              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 {posts.map((post) => (
                   <PostCard key={post.slug} {...post} />
                 ))}
@@ -84,11 +95,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="border-t border-border/50 py-8">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Andrew M. All Rights Reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }

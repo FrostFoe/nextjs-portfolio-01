@@ -2,26 +2,33 @@ import {
   Pagination as ShadPagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Pagination = () => {
   return (
     <ShadPagination className="mt-12">
-      <PaginationContent>
+      <PaginationContent className="gap-2">
         <PaginationItem>
-          <PaginationPrevious href="#" className="text-muted-foreground" />
+          <Button asChild variant="outline">
+            <Link href="#">Prev</Link>
+          </Button>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>1</PaginationLink>
+          <Button asChild variant="default">
+            <Link href="#">1</Link>
+          </Button>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" className="text-muted-foreground">2</PaginationLink>
+          <Button asChild variant="outline">
+            <Link href="#">2</Link>
+          </Button>
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" className="text-muted-foreground" />
+          <Button asChild variant="outline">
+            <Link href="#">Next</Link>
+          </Button>
         </PaginationItem>
       </PaginationContent>
     </ShadPagination>
