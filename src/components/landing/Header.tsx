@@ -3,28 +3,28 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '#' },
+    { name: 'About Me', href: '#' },
+    { name: 'Contact', href: '#' },
+    { name: 'Categories', href: '#' },
+    { name: 'Gallery', href: '#' },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="font-headline text-2xl font-bold text-white">
-          Blackhole
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+        <Link href="/" className="text-xl font-bold text-white">
+          Andrew M.
         </Link>
         
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -36,9 +36,10 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button asChild className="bg-gradient-to-r from-primary to-purple-700 font-bold text-primary-foreground transition-shadow hover:shadow-lg hover:shadow-primary/30">
-            <Link href="#contact">Contact Me</Link>
+        <div className="hidden items-center gap-2 md:flex">
+          <Button variant="ghost" size="icon">
+            <Search className="h-5 w-5 text-muted-foreground" />
+            <span className="sr-only">Search</span>
           </Button>
         </div>
 
@@ -68,8 +69,9 @@ const Header = () => {
               {link.name}
             </Link>
           ))}
-          <Button asChild className="mt-4 w-full bg-gradient-to-r from-primary to-purple-700 font-bold text-primary-foreground">
-            <Link href="#contact" onClick={() => setIsOpen(false)}>Contact Me</Link>
+          <Button variant="ghost" size="icon" className="mt-4">
+            <Search className="h-6 w-6 text-muted-foreground" />
+            <span className="sr-only">Search</span>
           </Button>
         </div>
       </div>

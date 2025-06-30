@@ -8,47 +8,47 @@ body {
 
 @layer base {
   :root {
-    --background: 215 39% 17%;
-    --foreground: 220 14% 96%;
-    --card: 217 33% 22%;
-    --card-foreground: 220 14% 96%;
-    --popover: 217 33% 22%;
-    --popover-foreground: 220 14% 96%;
-    --primary: 262 92% 65%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217 33% 27%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 27%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 262 92% 65%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 27%;
-    --input: 217 33% 27%;
-    --ring: 262 92% 65%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 0 0% 83%;
     --radius: 0.5rem;
   }
   .dark {
-    --background: 215 39% 17%;
-    --foreground: 220 14% 96%;
-    --card: 217 33% 22%;
-    --card-foreground: 220 14% 96%;
-    --popover: 217 33% 22%;
-    --popover-foreground: 220 14% 96%;
-    --primary: 262 92% 65%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217 33% 27%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 27%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 262 92% 65%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 217 33% 27%;
-    --input: 217 33% 27%;
-    --ring: 262 92% 65%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 0 0% 83%;
   }
 }
 
@@ -58,5 +58,13 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .hero-bg-pattern {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 }
