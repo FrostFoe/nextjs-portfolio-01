@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { MotionDiv, MotionLink } from '@/components/blog/Motion';
-import type { Post } from '@/lib/mdx';
-import { format } from 'date-fns';
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { MotionDiv, MotionLink } from "@/components/blog/Motion";
+import type { Post } from "@/lib/mdx";
+import { format } from "date-fns";
 
 type PostCardProps = {
   post: Post;
@@ -19,7 +19,11 @@ const PostCard = ({ post }: PostCardProps) => {
     >
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-3">
         <div className="relative h-56 w-full overflow-hidden rounded-xl md:col-span-1">
-          <MotionDiv className="h-full w-full" variants={{ hover: { scale: 1.05 } }} transition={{ duration: 0.3 }}>
+          <MotionDiv
+            className="h-full w-full"
+            variants={{ hover: { scale: 1.05 } }}
+            transition={{ duration: 0.3 }}
+          >
             <Image
               src={frontmatter.imageUrl}
               alt={frontmatter.title}
@@ -36,14 +40,16 @@ const PostCard = ({ post }: PostCardProps) => {
           <h3 className="mb-2 text-2xl font-bold leading-snug">
             <MotionDiv
               variants={{ hover: { x: 5 } }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               {frontmatter.title}
             </MotionDiv>
           </h3>
           <div className="mb-4 flex items-center text-sm text-muted-foreground">
-            <span className="material-symbols-outlined mr-2 text-base">calendar_month</span>
-            <span>{format(new Date(frontmatter.date), 'MMM dd, yyyy')}</span>
+            <span className="material-symbols-outlined mr-2 text-base">
+              calendar_month
+            </span>
+            <span>{format(new Date(frontmatter.date), "MMM dd, yyyy")}</span>
           </div>
           <p className="text-muted-foreground">{frontmatter.description}</p>
         </div>

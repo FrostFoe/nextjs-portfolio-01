@@ -1,11 +1,11 @@
-import PostCard from '@/components/blog/PostCard';
-import Sidebar from '@/components/blog/Sidebar';
-import { Button } from '@/components/ui/button';
-import { MotionDiv } from '@/components/blog/Motion';
-import { AnimatedMaterialIcon } from '@/components/ui/animated-icon';
-import { siteConfig } from '@/content/config';
-import { getAllPosts } from '@/lib/mdx';
-import Image from 'next/image';
+import PostCard from "@/components/blog/PostCard";
+import Sidebar from "@/components/blog/Sidebar";
+import { Button } from "@/components/ui/button";
+import { MotionDiv } from "@/components/blog/Motion";
+import { AnimatedMaterialIcon } from "@/components/ui/animated-icon";
+import { siteConfig } from "@/content/config";
+import { getAllPosts } from "@/lib/mdx";
+import Image from "next/image";
 
 export default async function Home() {
   const posts = await getAllPosts();
@@ -29,11 +29,16 @@ export default async function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Button size="lg" asChild>
                 <a href={homeConfig.hero.buttons.primary.url}>
-                  {homeConfig.hero.buttons.primary.text} <AnimatedMaterialIcon iconName="arrow_forward" className="ml-2" />
+                  {homeConfig.hero.buttons.primary.text}{" "}
+                  <AnimatedMaterialIcon
+                    iconName="arrow_forward"
+                    className="ml-2"
+                  />
                 </a>
               </Button>
               <Button size="lg" variant="outline">
-                <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" /> {homeConfig.hero.buttons.secondary.text}
+                <AnimatedMaterialIcon iconName="rss_feed" className="mr-2" />{" "}
+                {homeConfig.hero.buttons.secondary.text}
               </Button>
             </div>
           </MotionDiv>

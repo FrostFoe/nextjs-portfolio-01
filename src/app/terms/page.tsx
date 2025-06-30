@@ -1,6 +1,6 @@
-import { MotionDiv } from '@/components/blog/Motion';
-import { siteConfig } from '@/content/config';
-import type { Metadata } from 'next';
+import { MotionDiv } from "@/components/blog/Motion";
+import { siteConfig } from "@/content/config";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: siteConfig.termsPage.title,

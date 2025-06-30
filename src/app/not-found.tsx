@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { MotionDiv } from '@/components/blog/Motion';
-import { AnimatedMaterialIcon } from '@/components/ui/animated-icon';
-import { siteConfig } from '@/content/config';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { MotionDiv } from "@/components/blog/Motion";
+import { AnimatedMaterialIcon } from "@/components/ui/animated-icon";
+import { siteConfig } from "@/content/config";
 
 export default function NotFound() {
   const { notFoundPage } = siteConfig;
@@ -14,9 +14,12 @@ export default function NotFound() {
         className="px-4"
         initial={{ opacity: 0, y: -20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <AnimatedMaterialIcon iconName="explore_off" className="!text-8xl text-primary/50 mx-auto mb-6 !w-20 !h-20" />
+        <AnimatedMaterialIcon
+          iconName="explore_off"
+          className="!text-8xl text-primary/50 mx-auto mb-6 !w-20 !h-20"
+        />
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">
           {notFoundPage.title}
         </h1>

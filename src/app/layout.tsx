@@ -1,15 +1,15 @@
-import type {Metadata} from 'next';
-import './globals.css';
+import type { Metadata } from "next";
+import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import Footer from '@/components/blog/Footer';
-import Header from '@/components/blog/Header';
-import { siteConfig } from '@/content/config';
-import { Inter } from 'next/font/google';
-import { getAllPosts } from '@/lib/mdx';
+import Footer from "@/components/blog/Footer";
+import Header from "@/components/blog/Header";
+import { siteConfig } from "@/content/config";
+import { Inter } from "next/font/google";
+import { getAllPosts } from "@/lib/mdx";
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
   creator: siteConfig.author.name,
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
+    type: "website",
+    locale: "en_US",
     url: siteConfig.url,
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.title,
     images: [
       {
-        url: `${siteConfig.url}/og-image.png`, // Update with your OG image path
+        url: `${siteConfig.url}/og-image.png`,
         width: 1200,
         height: 630,
         alt: siteConfig.title,
@@ -39,16 +39,19 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og-image.png`], // Update with your OG image path
-    creator: `@${siteConfig.author.social.find(s => s.name === 'Twitter')?.url.split('/').pop()}`,
+    images: [`${siteConfig.url}/og-image.png`],
+    creator: `@${siteConfig.author.social
+      .find((s) => s.name === "Twitter")
+      ?.url.split("/")
+      .pop()}`,
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -62,7 +65,10 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} dark`}>
       <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <div className="flex flex-col min-h-screen">

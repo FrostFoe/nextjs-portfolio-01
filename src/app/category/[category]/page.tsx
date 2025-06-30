@@ -1,11 +1,11 @@
-import PostCard from '@/components/blog/PostCard';
-import Sidebar from '@/components/blog/Sidebar';
-import { MotionDiv } from '@/components/blog/Motion';
-import { getCategories, getPostsByCategory } from '@/lib/mdx';
-import { slugify } from '@/lib/utils';
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import { siteConfig } from '@/content/config';
+import PostCard from "@/components/blog/PostCard";
+import Sidebar from "@/components/blog/Sidebar";
+import { MotionDiv } from "@/components/blog/Motion";
+import { getCategories, getPostsByCategory } from "@/lib/mdx";
+import { slugify } from "@/lib/utils";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { siteConfig } from "@/content/config";
 
 type CategoryPageProps = {
   params: {
@@ -15,15 +15,19 @@ type CategoryPageProps = {
 
 export async function generateStaticParams() {
   const categories = await getCategories();
-  return Object.keys(categories).map(category => ({
+  return Object.keys(categories).map((category) => ({
     category: slugify(category),
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
   const { category } = params;
   const allCategories = await getCategories();
-  const originalCategory = Object.keys(allCategories).find(c => slugify(c) === category);
+  const originalCategory = Object.keys(allCategories).find(
+    (c) => slugify(c) === category,
+  );
 
   if (!originalCategory) {
     return {};
@@ -50,12 +54,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = params;
   const posts = await getPostsByCategory(category);
   const allCategories = await getCategories();
-  const originalCategory = Object.keys(allCategories).find(c => slugify(c) === category);
+  const originalCategory = Object.keys(allCategories).find(
+    (c) => slugify(c) === category,
+  );
 
   if (!posts.length || !originalCategory) {
     notFound();
@@ -70,9 +75,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.5 }}
         >
-          <h1 className="mb-4 text-4xl font-extrabold tracking-tight">Posts in category: "{originalCategory}"</h1>
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight">
+            Posts in category: "{originalCategory}"
+          </h1>
           <p className="mb-12 text-muted-foreground">
-            {posts.length} article{posts.length === 1 ? '' : 's'} found in this category.
+            {posts.length} article{posts.length === 1 ? "" : "s"} found in this
+            category.
           </p>
         </MotionDiv>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">

@@ -1,20 +1,23 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Separator } from '@/components/ui/separator';
-import { MotionDiv } from '@/components/blog/Motion';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AnimatedIconWrapper, AnimatedMaterialIcon } from '@/components/ui/animated-icon';
-import { siteConfig } from '@/content/config';
+} from "@/components/ui/accordion";
+import { Separator } from "@/components/ui/separator";
+import { MotionDiv } from "@/components/blog/Motion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  AnimatedIconWrapper,
+  AnimatedMaterialIcon,
+} from "@/components/ui/animated-icon";
+import { siteConfig } from "@/content/config";
 
 export default function AboutPage() {
   const { author, about } = siteConfig;
@@ -22,7 +25,7 @@ export default function AboutPage() {
   return (
     <div className="bg-background text-foreground overflow-x-hidden">
       <main className="container mx-auto max-w-5xl px-4 py-16 sm:py-24">
-        <MotionDiv 
+        <MotionDiv
           className="text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,10 +46,16 @@ export default function AboutPage() {
             {about.intro}
           </p>
           <div className="mt-6 flex justify-center gap-6 text-muted-foreground">
-            {author.social.map(social => (
-              <Link key={social.name} href={social.url} className="transition-colors hover:text-primary">
+            {author.social.map((social) => (
+              <Link
+                key={social.name}
+                href={social.url}
+                className="transition-colors hover:text-primary"
+              >
                 <AnimatedIconWrapper>
-                  <span className="material-symbols-outlined">{social.icon}</span>
+                  <span className="material-symbols-outlined">
+                    {social.icon}
+                  </span>
                 </AnimatedIconWrapper>
               </Link>
             ))}
@@ -63,9 +72,13 @@ export default function AboutPage() {
         >
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{about.aboutSection.title}</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                {about.aboutSection.title}
+              </h2>
               {about.aboutSection.paragraphs.map((p, i) => (
-                <p key={i} className="text-muted-foreground">{p}</p>
+                <p key={i} className="text-muted-foreground">
+                  {p}
+                </p>
               ))}
               <Button variant="outline" size="lg" className="mt-4">
                 {about.aboutSection.buttonText}
@@ -110,14 +123,21 @@ export default function AboutPage() {
                 <Card className="h-full text-center">
                   <CardContent className="p-8">
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
-                      <AnimatedMaterialIcon iconName={service.icon} className="text-primary text-3xl" />
+                      <AnimatedMaterialIcon
+                        iconName={service.icon}
+                        className="text-primary text-3xl"
+                      />
                     </div>
                     <h3 className="mt-6 text-xl font-bold">{service.title}</h3>
-                    <p className="mt-2 text-muted-foreground">{service.description}</p>
+                    <p className="mt-2 text-muted-foreground">
+                      {service.description}
+                    </p>
                     <ul className="mt-6 space-y-3 text-left">
                       {service.items.map((item) => (
                         <li key={item} className="flex items-start">
-                          <span className="material-symbols-outlined mr-3 h-5 w-5 flex-shrink-0 text-primary">check</span>
+                          <span className="material-symbols-outlined mr-3 h-5 w-5 flex-shrink-0 text-primary">
+                            check
+                          </span>
                           <span className="text-muted-foreground">{item}</span>
                         </li>
                       ))}
@@ -128,14 +148,14 @@ export default function AboutPage() {
             ))}
           </div>
         </MotionDiv>
-        
+
         <Separator className="my-16 lg:my-24" />
 
         <MotionDiv
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, amount: 0.3 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
@@ -145,7 +165,9 @@ export default function AboutPage() {
               <p className="text-muted-foreground">
                 {about.faqSection.description}
               </p>
-              <Button variant="outline" className="!mt-6">{about.faqSection.buttonText}</Button>
+              <Button variant="outline" className="!mt-6">
+                {about.faqSection.buttonText}
+              </Button>
             </div>
             <Accordion type="single" collapsible className="w-full">
               {about.faqs.map((faq, index) => (
