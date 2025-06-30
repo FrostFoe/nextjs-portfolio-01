@@ -28,7 +28,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
             whileHover={{ scale: 1.05, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            {siteConfig.author.name.split(" ")[0]} M.
+            {siteConfig.author.name}
           </MotionLink>
 
           <nav className="hidden items-center gap-1 md:flex">

@@ -1,7 +1,7 @@
 export const siteConfig = {
-  title: "Andrew M. | Crafting the Future of UI/UX Design",
+  title: "FrostFoe | Crafting the Future of UI/UX Design",
   description:
-    "Explore insightful articles and tutorials on UI/UX design, front-end development, and modern web technologies by Andrew Mitchell.",
+    "Explore insightful articles and tutorials on UI/UX design, front-end development, and modern web technologies by FrostFoe.",
   url: "https://your-awesome-blog.com",
   keywords: [
     "UI/UX Design",
@@ -13,10 +13,10 @@ export const siteConfig = {
   ],
 
   author: {
-    name: "Andrew Mitchell",
+    name: "FrostFoe",
     avatar: "https://placehold.co/128x128.png",
     bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights.",
-    email: "andrew.mitchell@example.com",
+    email: "frost.foe@example.com",
     social: [
       { name: "LinkedIn", url: "#", icon: "Linkedin" },
       { name: "Behance", url: "#", icon: "Palette" },
@@ -35,7 +35,7 @@ export const siteConfig = {
     hero: {
       title: "Code, Pixels, and a Dash of Magic.",
       description:
-        "Welcome to my digital playground. I'm Andrew, a designer and developer obsessed with building delightful, human-centered experiences.",
+        "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences.",
       buttons: {
         primary: { text: "My Work", url: "#" },
         secondary: { text: "Subscribe", url: "#" },
@@ -170,7 +170,7 @@ export const siteConfig = {
       { name: "Docs", url: "/docs" },
       { name: "404", url: "/404" },
     ],
-    copyright: "© {year} Andrew Mitchell. All rights reserved.",
+    copyright: "© {year} FrostFoe. All rights reserved.",
   },
 
   termsPage: {
