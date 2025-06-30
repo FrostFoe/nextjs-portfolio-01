@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -16,27 +16,22 @@ import { MotionDiv } from "./Motion";
 
 export default function SearchDialog({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Post[]>([]);
 
-  useEffect(() => {
+  const results = posts.filter((post) => {
     if (!query.trim()) {
-      setResults([]);
-      return;
+      return false;
     }
 
-    const searchResults = posts.filter((post) => {
-      const queryLower = query.toLowerCase();
-      const titleMatch = post.frontmatter.title
-        .toLowerCase()
-        .includes(queryLower);
-      const descriptionMatch = post.frontmatter.description
-        .toLowerCase()
-        .includes(queryLower);
-      const contentMatch = post.content.toLowerCase().includes(queryLower);
-      return titleMatch || descriptionMatch || contentMatch;
-    });
-    setResults(searchResults);
-  }, [query, posts]);
+    const queryLower = query.toLowerCase();
+    const titleMatch = post.frontmatter.title
+      .toLowerCase()
+      .includes(queryLower);
+    const descriptionMatch = post.frontmatter.description
+      .toLowerCase()
+      .includes(queryLower);
+    const contentMatch = post.content.toLowerCase().includes(queryLower);
+    return titleMatch || descriptionMatch || contentMatch;
+  });
 
   return (
     <>
@@ -61,32 +56,39 @@ export default function SearchDialog({ posts }: { posts: Post[] }) {
       </div>
       <ScrollArea className="h-[400px] mt-4">
         <div className="space-y-4 pr-4">
-          {results.length > 0 ? (
-            results.map((post, index) => (
-              <DialogClose asChild key={post.slug}>
-                <Link href={`/blog/${post.slug}`}>
-                  <MotionDiv
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="block p-4 rounded-lg hover:bg-accent transition-colors cursor-pointer"
-                  >
-                    <h4 className="font-semibold">{post.frontmatter.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                      {post.frontmatter.description}
-                    </p>
-                    <p className="text-xs text-muted-foreground/80 mt-2">
-                      {format(new Date(post.frontmatter.date), "MMM dd, yyyy")}
-                    </p>
-                  </MotionDiv>
-                </Link>
-              </DialogClose>
-            ))
-          ) : query ? (
-            <div className="text-center py-10 text-muted-foreground">
-              <p className="text-lg">No results found for "{query}"</p>
-              <p className="text-sm">Try searching for something else.</p>
-            </div>
+          {query.trim().length > 0 ? (
+            results.length > 0 ? (
+              results.map((post, index) => (
+                <DialogClose asChild key={post.slug}>
+                  <Link href={`/blog/${post.slug}`}>
+                    <MotionDiv
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="block p-4 rounded-lg hover:bg-accent transition-colors cursor-pointer"
+                    >
+                      <h4 className="font-semibold">
+                        {post.frontmatter.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                        {post.frontmatter.description}
+                      </p>
+                      <p className="text-xs text-muted-foreground/80 mt-2">
+                        {format(
+                          new Date(post.frontmatter.date),
+                          "MMM dd, yyyy",
+                        )}
+                      </p>
+                    </MotionDiv>
+                  </Link>
+                </DialogClose>
+              ))
+            ) : (
+              <div className="text-center py-10 text-muted-foreground">
+                <p className="text-lg">No results found for "{query}"</p>
+                <p className="text-sm">Try searching for something else.</p>
+              </div>
+            )
           ) : (
             <div className="text-center py-10 text-muted-foreground">
               <p>Start typing to search for posts.</p>
