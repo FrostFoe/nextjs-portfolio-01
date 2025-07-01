@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { MotionDiv, MotionLink } from "@/components/blog/Motion";
+import { MotionDiv } from "@/components/blog/Motion";
 import Link from "next/link";
 import { siteConfig } from "@/content/config";
 import { format } from "date-fns";
@@ -26,6 +26,8 @@ import {
   Twitter,
   Facebook,
 } from "lucide-react";
+import { Suspense } from "react";
+import Sidebar from "@/components/blog/Sidebar";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -78,10 +80,6 @@ const CommentsSection = dynamic(
     loading: () => <CommentsSectionLoader />,
   },
 );
-
-const Sidebar = dynamic(() => import("@/components/blog/Sidebar"), {
-  loading: () => <SidebarLoader />,
-});
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -312,7 +310,9 @@ export default async function BlogPostPage({
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Sidebar />
+            <Suspense fallback={<SidebarLoader />}>
+              <Sidebar />
+            </Suspense>
           </MotionDiv>
         </div>
       </div>

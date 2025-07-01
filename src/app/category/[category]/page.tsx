@@ -6,12 +6,9 @@ import { slugify } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
-import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import Sidebar from "@/components/blog/Sidebar";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
-
-const DynamicSidebar = dynamic(() => import("@/components/blog/Sidebar"), {
-  loading: () => <SidebarLoader />,
-});
 
 type CategoryPageProps = {
   params: {
@@ -126,7 +123,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </MotionDiv>
           </div>
           <div className="lg:col-span-1">
-            <DynamicSidebar />
+            <Suspense fallback={<SidebarLoader />}>
+              <Sidebar />
+            </Suspense>
           </div>
         </div>
       </div>

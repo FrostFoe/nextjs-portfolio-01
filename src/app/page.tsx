@@ -9,10 +9,9 @@ import { ArrowRight, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
+import { Suspense } from "react";
+import Sidebar from "@/components/blog/Sidebar";
 
-const Sidebar = dynamic(() => import("@/components/blog/Sidebar"), {
-  loading: () => <SidebarLoader />,
-});
 const ParticlesContainer = dynamic(
   () =>
     import("@/components/ui/particles-container").then(
@@ -176,7 +175,9 @@ export default async function Home() {
             </MotionDiv>
           </div>
           <div className="lg:col-span-1">
-            <Sidebar />
+            <Suspense fallback={<SidebarLoader />}>
+              <Sidebar />
+            </Suspense>
           </div>
         </div>
       </div>
