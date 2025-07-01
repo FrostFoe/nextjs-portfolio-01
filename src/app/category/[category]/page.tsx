@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
 import { MotionDiv } from "@/components/blog/Motion";
@@ -27,11 +28,12 @@ const containerVariant = {
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100 },
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
   },
 };
 
@@ -112,6 +114,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               variants={containerVariant}
               initial="hidden"
               animate="visible"
+              style={{ perspective: "1000px" }}
             >
               {posts.map((post) => (
                 <MotionDiv key={post.slug} variants={itemVariant}>

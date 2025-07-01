@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -48,11 +49,12 @@ const containerVariant = {
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100 },
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
   },
 };
 
@@ -64,9 +66,9 @@ export default function AboutPage() {
       <main className="container mx-auto max-w-5xl px-4 py-16 sm:py-24">
         <MotionDiv
           className="text-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: -20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, type: "spring" }}
         >
           <Avatar className="mx-auto h-32 w-32 border-2 border-primary/20">
             <AvatarImage
@@ -92,7 +94,7 @@ export default function AboutPage() {
                   className="transition-colors hover:text-primary"
                 >
                   <MotionDiv
-                    whileHover={{ scale: 1.2, rotate: -8 }}
+                    whileHover={{ scale: 1.2, rotate: -8, z: 10 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
@@ -113,6 +115,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             className="space-y-6"
+            style={{ perspective: "1000px" }}
           >
             <MotionDiv variants={itemVariant}>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -126,9 +129,11 @@ export default function AboutPage() {
             ))}
             <MotionDiv variants={itemVariant}>
               <MotionDiv
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
+                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="inline-block"
+                style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button variant="outline" size="lg" className="mt-4">
                   {about.aboutSection.buttonText}
@@ -137,11 +142,12 @@ export default function AboutPage() {
             </MotionDiv>
           </MotionDiv>
           <MotionDiv
-            whileHover={{ scale: 1.03, y: -5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.03, y: -5, rotateY: 5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            initial={{ opacity: 0, x: 50, rotateY: -30 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true, amount: 0.3 }}
+            style={{ perspective: "1000px" }}
           >
             <Image
               src={about.aboutSection.image.src}
@@ -171,6 +177,7 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ perspective: "1000px" }}
           >
             {about.services.map((service) => {
               const ServiceIcon = serviceIconMap[service.icon];
@@ -181,9 +188,11 @@ export default function AboutPage() {
                   whileHover={{
                     y: -8,
                     scale: 1.03,
-                    rotate: 1,
-                    transition: { type: "spring", stiffness: 300 },
+                    rotateY: 10,
+                    z: 20,
                   }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  style={{ transformStyle: "preserve-3d" }}
                 >
                   <Card className="h-full text-center transition-shadow duration-300">
                     <CardContent className="p-8">
@@ -225,6 +234,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             className="space-y-4"
+            style={{ perspective: "1000px" }}
           >
             <MotionDiv variants={itemVariant}>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -238,9 +248,11 @@ export default function AboutPage() {
             </MotionDiv>
             <MotionDiv variants={itemVariant}>
               <MotionDiv
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
+                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="inline-block"
+                style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button variant="outline" className="!mt-6">
                   {about.faqSection.buttonText}
@@ -254,6 +266,7 @@ export default function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ perspective: "1000px" }}
           >
             <Accordion type="single" collapsible className="w-full">
               {about.faqs.map((faq, index) => (

@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/blog/PostCard";
 import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
@@ -21,20 +22,22 @@ const containerVariant = {
 };
 
 const heroItemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100 },
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
   },
 };
 
 const postItemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100 },
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
   },
 };
 
@@ -50,6 +53,7 @@ export default async function Home() {
             variants={containerVariant}
             initial="hidden"
             animate="visible"
+            style={{ perspective: "1000px" }}
           >
             <MotionDiv variants={heroItemVariant}>
               <AnimatedTitle text={homeConfig.hero.title} />
@@ -64,9 +68,10 @@ export default async function Home() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <MotionDiv
-                whileHover={{ y: -2, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -2, scale: 1.05, z: 10, rotateX: -10 }}
+                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
+                style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button size="lg" asChild>
                   <a href={homeConfig.hero.buttons.primary.url}>
@@ -76,9 +81,10 @@ export default async function Home() {
                 </Button>
               </MotionDiv>
               <MotionDiv
-                whileHover={{ y: -2, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -2, scale: 1.05, z: 10, rotateX: -10 }}
+                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
+                style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button size="lg" variant="outline">
                   <Rss className="mr-2 h-5 w-5" />{" "}
@@ -89,14 +95,16 @@ export default async function Home() {
           </MotionDiv>
           <MotionDiv
             className="hidden lg:block"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+            style={{ perspective: "1000px" }}
           >
             <MotionDiv
               className="group relative"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200 }}
+              whileHover={{ scale: 1.03, rotateY: 5, z: 10 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <div className="absolute -inset-2 rounded-xl bg-primary/20 opacity-0 blur-xl transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
               <Image
@@ -135,6 +143,7 @@ export default async function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
+              style={{ perspective: "1000px" }}
             >
               {posts.map((post) => (
                 <MotionDiv key={post.slug} variants={postItemVariant}>

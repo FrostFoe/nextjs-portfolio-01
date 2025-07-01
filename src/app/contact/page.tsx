@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,8 +54,13 @@ const staggerContainer = {
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
+  show: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { duration: 0.5, type: "spring", damping: 15 },
+  },
 };
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -91,9 +97,9 @@ export default function ContactPage() {
         <div className="container mx-auto max-w-4xl px-4 py-16 sm:py-24">
           <MotionDiv
             className="text-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, type: "spring" }}
           >
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
               {contactConfig.title}
@@ -109,6 +115,9 @@ export default function ContactPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ y: -5, z: 15, rotateX: 3, rotateY: -3 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -118,6 +127,7 @@ export default function ContactPage() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
+                  style={{ perspective: "1000px" }}
                 >
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                     <MotionDiv variants={itemVariant}>
@@ -199,10 +209,14 @@ export default function ContactPage() {
                   </MotionDiv>
                   <MotionDiv variants={itemVariant} className="text-center">
                     <MotionDiv
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
+                      whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       className="inline-block"
+                      style={{
+                        perspective: "800px",
+                        transformStyle: "preserve-3d",
+                      }}
                     >
                       <Button type="submit" size="lg">
                         <Send className="mr-2 h-4 w-4" />
@@ -228,7 +242,7 @@ export default function ContactPage() {
                 className="transition-colors hover:text-primary"
               >
                 <MotionDiv
-                  whileHover={{ scale: 1.2, y: -2, rotate: 5 }}
+                  whileHover={{ scale: 1.2, y: -2, rotate: 5, z: 10 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <Mail />
@@ -243,7 +257,7 @@ export default function ContactPage() {
                     className="transition-colors hover:text-primary"
                   >
                     <MotionDiv
-                      whileHover={{ scale: 1.2, rotate: -8 }}
+                      whileHover={{ scale: 1.2, rotate: -8, z: 10 }}
                       whileTap={{ scale: 0.9 }}
                       transition={{
                         type: "spring",

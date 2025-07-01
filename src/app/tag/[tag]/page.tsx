@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/blog/PostCard";
 import { MotionDiv } from "@/components/blog/Motion";
 import { getPostsByTag, getTags } from "@/lib/mdx";
@@ -26,11 +27,12 @@ const containerVariant = {
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20, rotateX: -20, transformOrigin: "bottom" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100 },
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
   },
 };
 
@@ -107,6 +109,7 @@ export default async function TagPage({ params }: TagPageProps) {
               variants={containerVariant}
               initial="hidden"
               animate="visible"
+              style={{ perspective: "1000px" }}
             >
               {posts.map((post) => (
                 <MotionDiv key={post.slug} variants={itemVariant}>
