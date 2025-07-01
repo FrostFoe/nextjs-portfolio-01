@@ -67,7 +67,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${spaceGrotesk.variable} dark`}>
-      <head />
+      <head>
+        <link rel="preconnect" href="https://placehold.co" />
+      </head>
       <body className="font-body bg-background text-foreground antialiased">
         <Spotlight />
         <div className="relative z-40 flex flex-col min-h-screen">

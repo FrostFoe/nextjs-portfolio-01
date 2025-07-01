@@ -8,9 +8,15 @@ import Image from "next/image";
 import { ArrowRight, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
-import { ParticlesContainer } from "@/components/ui/particles-container";
 
 const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
+const ParticlesContainer = dynamic(
+  () =>
+    import("@/components/ui/particles-container").then(
+      (m) => m.ParticlesContainer,
+    ),
+  { ssr: false },
+);
 
 const containerVariant = {
   hidden: { opacity: 0 },
@@ -70,7 +76,13 @@ export default async function Home() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <MotionDiv
-                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: 5 }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.05,
+                  rotateX: -10,
+                  rotateY: 5,
+                  z: 20,
+                }}
                 whileTap={{ scale: 0.95, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
@@ -83,7 +95,13 @@ export default async function Home() {
                 </Button>
               </MotionDiv>
               <MotionDiv
-                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: -5 }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.05,
+                  rotateX: -10,
+                  rotateY: -5,
+                  z: 20,
+                }}
                 whileTap={{ scale: 0.95, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
@@ -104,7 +122,7 @@ export default async function Home() {
           >
             <MotionDiv
               className="group relative"
-              whileHover={{ scale: 1.03, rotateY: 5, z: 10 }}
+              whileHover={{ scale: 1.03, rotateY: 5, z: 30 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               style={{ transformStyle: "preserve-3d" }}
             >
