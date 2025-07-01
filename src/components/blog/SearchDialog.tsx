@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -14,9 +14,44 @@ import type { Post } from "@/lib/mdx";
 import { format } from "date-fns";
 import { MotionDiv } from "./Motion";
 import { Search } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function SearchDialog({ posts }: { posts: Post[] }) {
+const SearchLoader = () => (
+  <div className="space-y-4">
+    {[...Array(3)].map((_, i) => (
+      <div key={i} className="flex flex-col space-y-2 rounded-lg p-4">
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-1/4 mt-1" />
+      </div>
+    ))}
+  </div>
+);
+
+export default function SearchDialog() {
   const [query, setQuery] = useState("");
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch("/api/search");
+        if (!res.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+        const data = await res.json();
+        setPosts(data);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "An unknown error occurred");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const results = posts.filter((post) => {
     if (!query.trim()) {
@@ -51,11 +86,19 @@ export default function SearchDialog({ posts }: { posts: Post[] }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           aria-label="Search posts"
+          disabled={isLoading || !!error}
         />
       </div>
       <ScrollArea className="h-[400px] mt-4">
         <div className="space-y-4 pr-4">
-          {query.trim().length > 0 ? (
+          {isLoading ? (
+            <SearchLoader />
+          ) : error ? (
+            <div className="text-center py-10 text-destructive">
+              <p className="text-lg">Error loading posts</p>
+              <p className="text-sm">{error}</p>
+            </div>
+          ) : query.trim().length > 0 ? (
             results.length > 0 ? (
               results.map((post, index) => (
                 <DialogClose asChild key={post.slug}>

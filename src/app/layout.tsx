@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/blog/Header";
 import { siteConfig } from "@/content/config";
 import { Space_Grotesk } from "next/font/google";
-import { getAllPosts } from "@/lib/mdx";
 import dynamic from "next/dynamic";
 import { Spotlight } from "@/components/ui/spotlight";
 
@@ -58,13 +57,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const posts = await getAllPosts();
-
   return (
     <html lang="en" className={`${spaceGrotesk.variable} dark`}>
       <head>
@@ -73,7 +70,7 @@ export default async function RootLayout({
       <body className="font-body bg-background text-foreground antialiased">
         <Spotlight />
         <div className="relative z-40 flex flex-col min-h-screen">
-          <Header posts={posts} />
+          <Header />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

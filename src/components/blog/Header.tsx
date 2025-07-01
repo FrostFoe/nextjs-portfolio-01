@@ -8,10 +8,9 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/content/config";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import SearchDialog from "./SearchDialog";
-import type { Post } from "@/lib/mdx";
 import { Search } from "lucide-react";
 
-const Header = ({ posts }: { posts: Post[] }) => {
+const Header = () => {
   const pathname = usePathname();
 
   return (
@@ -67,7 +66,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
                 </MotionDiv>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[625px]">
-                <SearchDialog posts={posts} />
+                <SearchDialog />
               </DialogContent>
             </Dialog>
           </div>
