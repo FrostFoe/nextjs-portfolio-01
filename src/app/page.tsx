@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ArrowRight, Rss } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
+import { ParticlesContainer } from "@/components/ui/particles-container";
 
 const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
@@ -47,7 +48,8 @@ export default async function Home() {
 
   return (
     <div className="bg-background font-sans text-foreground">
-      <section className="hero-bg-pattern border-b border-border/50">
+      <section className="relative hero-bg-pattern border-b border-border/50">
+        <ParticlesContainer />
         <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 py-20 lg:grid-cols-2 lg:py-32">
           <MotionDiv
             variants={containerVariant}

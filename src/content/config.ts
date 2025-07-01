@@ -1,3 +1,4 @@
+
 export const siteConfig = {
   title: "FrostFoe | Crafting Digital Cosmos",
   description:
@@ -29,6 +30,7 @@ export const siteConfig = {
   navLinks: [
     { name: "Home", href: "/" },
     { name: "About Me", href: "/about" },
+    { name: "Showcase", href: "/showcase" },
     { name: "Contact", href: "/contact" },
   ],
 
