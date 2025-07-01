@@ -44,6 +44,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
                 )}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 1 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 {link.name}
               </MotionLink>

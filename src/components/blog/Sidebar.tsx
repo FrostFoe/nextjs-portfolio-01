@@ -42,7 +42,8 @@ const AuthorWidget = () => {
                 className="hover:text-primary transition-colors"
               >
                 <MotionDiv
-                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileHover={{ scale: 1.2, rotate: -8 }}
+                  whileTap={{ scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   {Icon && <Icon className="h-5 w-5" />}

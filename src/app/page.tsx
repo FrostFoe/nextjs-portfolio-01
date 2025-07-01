@@ -30,7 +30,8 @@ export default async function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <MotionDiv
-                whileHover={{ y: -2 }}
+                whileHover={{ y: -2, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Button size="lg" asChild>
@@ -41,7 +42,8 @@ export default async function Home() {
                 </Button>
               </MotionDiv>
               <MotionDiv
-                whileHover={{ y: -2 }}
+                whileHover={{ y: -2, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <Button size="lg" variant="outline">
@@ -57,7 +59,11 @@ export default async function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="group relative">
+            <MotionDiv
+              className="group relative"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
               <div className="absolute -inset-2 rounded-xl bg-primary/20 opacity-0 blur-xl transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
               <Image
                 src={homeConfig.hero.image.src}
@@ -68,7 +74,7 @@ export default async function Home() {
                 className="relative rounded-2xl"
                 priority
               />
-            </div>
+            </MotionDiv>
           </MotionDiv>
         </div>
       </section>

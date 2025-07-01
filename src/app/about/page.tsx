@@ -73,7 +73,8 @@ export default function AboutPage() {
                   className="transition-colors hover:text-primary"
                 >
                   <MotionDiv
-                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    whileHover={{ scale: 1.2, rotate: -8 }}
+                    whileTap={{ scale: 0.9 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     {Icon && <Icon className="h-6 w-6" />}
@@ -102,13 +103,19 @@ export default function AboutPage() {
                   {p}
                 </p>
               ))}
-              <Button variant="outline" size="lg" className="mt-4">
-                {about.aboutSection.buttonText}
-              </Button>
+              <MotionDiv
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block"
+              >
+                <Button variant="outline" size="lg" className="mt-4">
+                  {about.aboutSection.buttonText}
+                </Button>
+              </MotionDiv>
             </div>
             <MotionDiv
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.03, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <Image
                 src={about.aboutSection.image.src}
@@ -143,7 +150,11 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   viewport={{ once: true, amount: 0.5 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
+                  whileHover={{
+                    y: -8,
+                    scale: 1.03,
+                    transition: { type: "spring", stiffness: 300 },
+                  }}
                 >
                   <Card className="h-full text-center hover:shadow-primary/20">
                     <CardContent className="p-8">
@@ -192,9 +203,15 @@ export default function AboutPage() {
               <p className="text-muted-foreground">
                 {about.faqSection.description}
               </p>
-              <Button variant="outline" className="!mt-6">
-                {about.faqSection.buttonText}
-              </Button>
+              <MotionDiv
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block"
+              >
+                <Button variant="outline" className="!mt-6">
+                  {about.faqSection.buttonText}
+                </Button>
+              </MotionDiv>
             </div>
             <Accordion type="single" collapsible className="w-full">
               {about.faqs.map((faq, index) => (

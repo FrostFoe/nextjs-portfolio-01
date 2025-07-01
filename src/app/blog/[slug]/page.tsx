@@ -5,7 +5,7 @@ import Image from "next/image";
 import Sidebar from "@/components/blog/Sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { MotionDiv } from "@/components/blog/Motion";
+import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import Link from "next/link";
 import { siteConfig } from "@/content/config";
 import { format } from "date-fns";
@@ -260,29 +260,25 @@ export default async function BlogPostPage({
                   {blogConfig.shareLinks.map((link) => {
                     const Icon = iconMap[link.icon];
                     return (
-                      <Button
+                      <MotionDiv
                         key={link.name}
-                        variant="ghost"
-                        size="sm"
-                        asChild
+                        whileHover={{ y: -2 }}
+                        transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <Link
-                          href={link.url}
-                          className="flex items-center gap-2"
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
                         >
-                          <MotionDiv
-                            whileHover={{ scale: 1.1, rotate: -5 }}
-                            transition={{
-                              type: "spring",
-                              stiffness: 400,
-                              damping: 10,
-                            }}
+                          <Link
+                            href={link.url}
+                            className="flex items-center gap-2"
                           >
                             {Icon && <Icon className="h-4 w-4" />}
-                          </MotionDiv>
-                          {link.name}
-                        </Link>
-                      </Button>
+                            {link.name}
+                          </Link>
+                        </Button>
+                      </MotionDiv>
                     );
                   })}
                 </div>

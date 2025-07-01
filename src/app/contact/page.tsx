@@ -198,10 +198,16 @@ export default function ContactPage() {
                     />
                   </MotionDiv>
                   <MotionDiv variants={itemVariant} className="text-center">
-                    <Button type="submit" size="lg">
-                      <Send className="mr-2 h-4 w-4" />
-                      {contactConfig.form.buttonText}
-                    </Button>
+                    <MotionDiv
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-block"
+                    >
+                      <Button type="submit" size="lg">
+                        <Send className="mr-2 h-4 w-4" />
+                        {contactConfig.form.buttonText}
+                      </Button>
+                    </MotionDiv>
                   </MotionDiv>
                 </MotionDiv>
               </form>
@@ -236,7 +242,8 @@ export default function ContactPage() {
                     className="transition-colors hover:text-primary"
                   >
                     <MotionDiv
-                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      whileHover={{ scale: 1.2, rotate: -8 }}
+                      whileTap={{ scale: 0.9 }}
                       transition={{
                         type: "spring",
                         stiffness: 400,
