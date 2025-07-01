@@ -129,8 +129,8 @@ export default function AboutPage() {
             ))}
             <MotionDiv variants={itemVariant}>
               <MotionDiv
-                whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
-                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
+                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: 5 }}
+                whileTap={{ scale: 0.95, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="inline-block"
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
@@ -186,10 +186,11 @@ export default function AboutPage() {
                   key={service.title}
                   variants={itemVariant}
                   whileHover={{
-                    y: -8,
+                    y: -10,
                     scale: 1.03,
-                    rotateY: 10,
-                    z: 20,
+                    rotateY: 5,
+                    rotateX: -5,
+                    z: 30,
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
                   style={{ transformStyle: "preserve-3d" }}
@@ -248,8 +249,8 @@ export default function AboutPage() {
             </MotionDiv>
             <MotionDiv variants={itemVariant}>
               <MotionDiv
-                whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
-                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
+                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: 5 }}
+                whileTap={{ scale: 0.95, rotateX: 10 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="inline-block"
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
@@ -270,7 +271,12 @@ export default function AboutPage() {
           >
             <Accordion type="single" collapsible className="w-full">
               {about.faqs.map((faq, index) => (
-                <MotionDiv key={index} variants={itemVariant}>
+                <MotionDiv
+                  key={index}
+                  variants={itemVariant}
+                  whileHover={{ z: 15, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <AccordionItem value={`item-${index + 1}`}>
                     <AccordionTrigger className="text-left hover:no-underline">
                       {faq.question}

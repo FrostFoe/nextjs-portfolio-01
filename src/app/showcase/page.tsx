@@ -1,7 +1,8 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { MotionDiv } from "@/components/blog/Motion";
+import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
 
@@ -104,31 +105,42 @@ export default function ShowcasePage() {
         >
           {showcaseItems.map((item, index) => (
             <MotionDiv key={index} variants={itemVariant}>
-              <MotionDiv
-                whileHover={{ scale: 1.03, y: -8, z: 20, rotateY: 5 }}
+              <MotionLink
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group"
+                whileHover={{ scale: 1.03, y: -8, rotateY: 5, rotateX: -3 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  <Card className="h-full overflow-hidden transition-shadow duration-300 hover:shadow-2xl hover:shadow-primary/10">
-                    <div className="relative aspect-video w-full">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                        data-ai-hint={item.hint}
-                      />
-                    </div>
-                    <CardContent className="p-6">
+                <Card className="h-full overflow-hidden transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-primary/10">
+                  <MotionDiv
+                    className="relative aspect-video w-full"
+                    whileHover={{ z: 20 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      data-ai-hint={item.hint}
+                    />
+                  </MotionDiv>
+                  <CardContent className="p-6">
+                    <MotionDiv
+                      whileHover={{ z: 15 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    >
                       <h3 className="text-xl font-bold">{item.title}</h3>
                       <p className="mt-2 text-muted-foreground">
                         {item.description}
                       </p>
-                    </CardContent>
-                  </Card>
-                </a>
-              </MotionDiv>
+                    </MotionDiv>
+                  </CardContent>
+                </Card>
+              </MotionLink>
             </MotionDiv>
           ))}
         </MotionDiv>

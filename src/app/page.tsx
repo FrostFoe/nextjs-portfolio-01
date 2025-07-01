@@ -70,9 +70,9 @@ export default async function Home() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <MotionDiv
-                whileHover={{ y: -2, scale: 1.05, z: 10, rotateX: -10 }}
-                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: 5 }}
+                whileTap={{ scale: 0.95, rotateX: 10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button size="lg" asChild>
@@ -83,9 +83,9 @@ export default async function Home() {
                 </Button>
               </MotionDiv>
               <MotionDiv
-                whileHover={{ y: -2, scale: 1.05, z: 10, rotateX: -10 }}
-                whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ y: -4, scale: 1.05, rotateX: -10, rotateY: -5 }}
+                whileTap={{ scale: 0.95, rotateX: 10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button size="lg" variant="outline">

@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { MotionLink } from "@/components/blog/Motion";
+import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import type { Post } from "@/lib/mdx";
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
@@ -17,14 +17,19 @@ const PostCard = ({ post }: PostCardProps) => {
       href={`/blog/${slug}`}
       className="group block"
       style={{ perspective: "1000px" }}
-      whileHover={{ scale: 1.02, z: 25, rotateY: 3 }}
-      transition={{ type: "spring", stiffness: 200, damping: 20 }}
     >
-      <div
-        className="grid grid-cols-1 items-center gap-8 rounded-lg border border-border bg-card p-6 shadow-md transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-white/5 md:grid-cols-3"
+      <MotionDiv
+        className="grid grid-cols-1 items-center gap-8 rounded-lg border border-border bg-card p-6 shadow-md transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-primary/10 md:grid-cols-3"
         style={{ transformStyle: "preserve-3d" }}
+        whileHover={{ scale: 1.02, rotateY: 3 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
-        <div className="relative h-56 w-full overflow-hidden rounded-xl md:col-span-1">
+        <MotionDiv
+          className="relative h-56 w-full overflow-hidden rounded-xl md:col-span-1"
+          style={{ transformStyle: "preserve-3d" }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          whileHover={{ z: 30, scale: 1.05 }}
+        >
           <Image
             src={frontmatter.imageUrl}
             alt={frontmatter.title}
@@ -32,8 +37,12 @@ const PostCard = ({ post }: PostCardProps) => {
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             data-ai-hint={frontmatter.imageHint}
           />
-        </div>
-        <div className="md:col-span-2">
+        </MotionDiv>
+        <MotionDiv
+          className="md:col-span-2"
+          whileHover={{ z: 20 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
           <Badge variant="outline" className="mb-2">
             {frontmatter.category}
           </Badge>
@@ -46,8 +55,8 @@ const PostCard = ({ post }: PostCardProps) => {
             <span>{format(new Date(frontmatter.date), "MMM dd, yyyy")}</span>
           </div>
           <p className="text-muted-foreground">{frontmatter.description}</p>
-        </div>
-      </div>
+        </MotionDiv>
+      </MotionDiv>
     </MotionLink>
   );
 };

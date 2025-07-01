@@ -209,7 +209,13 @@ export default function ContactPage() {
                   </MotionDiv>
                   <MotionDiv variants={itemVariant} className="text-center">
                     <MotionDiv
-                      whileHover={{ scale: 1.05, y: -2, z: 10, rotateX: -10 }}
+                      whileHover={{
+                        scale: 1.05,
+                        y: -4,
+                        z: 10,
+                        rotateX: -15,
+                        rotateY: 5,
+                      }}
                       whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       className="inline-block"
