@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useMousePosition } from '@/hooks/use-mouse-position';
+import { useState, useEffect } from "react";
+import { useMousePosition } from "@/hooks/use-mouse-position";
 
 export function Spotlight() {
   const [isMounted, setIsMounted] = useState(false);
@@ -24,4 +24,4 @@ export function Spotlight() {
       }}
     />
   );
-};
+}

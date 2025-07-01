@@ -1,4 +1,3 @@
-
 export const siteConfig = {
   title: "FrostFoe | Crafting Digital Cosmos 🌌",
   description:
@@ -228,7 +227,8 @@ export const siteConfig = {
 
   notFoundPage: {
     title: "404 - Lost in Space 👽",
-    description: "Oops! Looks like you've ventured into an uncharted quadrant. 🧭",
+    description:
+      "Oops! Looks like you've ventured into an uncharted quadrant. 🧭",
     buttonText: "Go Back Home",
   },
 };

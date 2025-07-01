@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
@@ -132,7 +131,11 @@ export default function ShowcasePage() {
                   <CardContent className="p-6">
                     <MotionDiv
                       whileHover={{ z: 15 }}
-                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 15,
+                      }}
                     >
                       <h3 className="flex items-center justify-between text-xl font-bold">
                         {item.title}

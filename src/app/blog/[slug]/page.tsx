@@ -267,11 +267,7 @@ export default async function BlogPostPage({
                         whileHover={{ y: -2 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          asChild
-                        >
+                        <Button variant="ghost" size="sm" asChild>
                           <Link
                             href={link.url}
                             className="flex items-center gap-2"

@@ -1,4 +1,3 @@
-
 import PostCard from "@/components/blog/PostCard";
 import { MotionDiv } from "@/components/blog/Motion";
 import { getPostsByTag, getTags } from "@/lib/mdx";

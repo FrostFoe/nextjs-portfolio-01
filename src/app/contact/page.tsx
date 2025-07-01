@@ -1,4 +1,3 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,14 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MotionDiv } from "@/components/blog/Motion";
 import { siteConfig } from "@/content/config";
 import { useToast } from "@/hooks/use-toast";
-import {
-  Send,
-  Mail,
-  Linkedin,
-  Palette,
-  Twitter,
-  Dribbble,
-} from "lucide-react";
+import { Send, Mail, Linkedin, Palette, Twitter, Dribbble } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -217,7 +209,11 @@ export default function ContactPage() {
                         rotateY: 5,
                       }}
                       whileTap={{ scale: 0.95, z: 5, rotateX: 10 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 10,
+                      }}
                       className="inline-block"
                       style={{
                         perspective: "800px",

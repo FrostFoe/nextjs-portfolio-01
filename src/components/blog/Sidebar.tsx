@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { getAllPosts, getCategories, getTags } from "@/lib/mdx";
 import SidebarUI from "./SidebarUI";
