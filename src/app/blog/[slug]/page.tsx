@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import Sidebar from "@/components/blog/Sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
@@ -78,6 +77,8 @@ const CommentsSection = dynamic(
     loading: () => <CommentsSectionLoader />,
   },
 );
+
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
