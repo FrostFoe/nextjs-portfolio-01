@@ -181,10 +181,11 @@ export default function AboutPage() {
                   whileHover={{
                     y: -8,
                     scale: 1.03,
+                    rotate: 1,
                     transition: { type: "spring", stiffness: 300 },
                   }}
                 >
-                  <Card className="h-full text-center hover:shadow-glow-primary transition-shadow duration-300">
+                  <Card className="h-full text-center transition-shadow duration-300">
                     <CardContent className="p-8">
                       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
                         {ServiceIcon && (

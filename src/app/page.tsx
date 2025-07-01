@@ -6,6 +6,7 @@ import { getAllPosts } from "@/lib/mdx";
 import Image from "next/image";
 import { ArrowRight, Rss } from "lucide-react";
 import dynamic from "next/dynamic";
+import { AnimatedTitle } from "@/components/ui/animated-title";
 
 const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
@@ -51,9 +52,7 @@ export default async function Home() {
             animate="visible"
           >
             <MotionDiv variants={heroItemVariant}>
-              <h1 className="text-4xl font-extrabold tracking-tighter md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary via-fuchsia-500 to-accent">
-                {homeConfig.hero.title}
-              </h1>
+              <AnimatedTitle text={homeConfig.hero.title} />
             </MotionDiv>
             <MotionDiv variants={heroItemVariant}>
               <p className="mt-6 max-w-xl text-lg text-muted-foreground">

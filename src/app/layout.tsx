@@ -6,6 +6,7 @@ import { siteConfig } from "@/content/config";
 import { Space_Grotesk } from "next/font/google";
 import { getAllPosts } from "@/lib/mdx";
 import dynamic from "next/dynamic";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const Footer = dynamic(() => import("@/components/blog/Footer"));
 
@@ -68,7 +69,8 @@ export default async function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} dark`}>
       <head />
       <body className="font-body bg-background text-foreground antialiased">
-        <div className="flex flex-col min-h-screen">
+        <Spotlight />
+        <div className="relative z-40 flex flex-col min-h-screen">
           <Header posts={posts} />
           <main className="flex-1">{children}</main>
           <Footer />
