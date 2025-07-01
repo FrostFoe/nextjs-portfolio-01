@@ -16,7 +16,8 @@ export const siteConfig = {
 
   author: {
     name: "FrostFoe",
-    avatar: "https://placehold.co/128x128.png",
+    avatar:
+      "https://raw.githubusercontent.com/FrostFoe/localhost/refs/heads/main/images/logo.png",
     bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights. ✨",
     email: "frost.foe@example.com",
     social: [

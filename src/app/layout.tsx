@@ -66,6 +66,7 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} dark`}>
       <head>
         <link rel="preconnect" href="https://placehold.co" />
+        <link rel="preconnect" href="https://raw.githubusercontent.com" />
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <Spotlight />
