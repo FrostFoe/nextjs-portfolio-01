@@ -1,5 +1,7 @@
+
 "use client";
 
+import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -28,4 +30,4 @@ const CommentForm = () => (
   </div>
 );
 
-export default CommentForm;
+export default React.memo(CommentForm);

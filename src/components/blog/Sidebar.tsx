@@ -1,3 +1,5 @@
+
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,7 +38,7 @@ const itemVariant = {
   },
 };
 
-const AuthorWidget = () => {
+const AuthorWidget = React.memo(function AuthorWidget() {
   const { author } = siteConfig;
   return (
     <Card>
@@ -74,7 +76,7 @@ const AuthorWidget = () => {
       </CardContent>
     </Card>
   );
-};
+});
 
 const CategoriesWidget = async () => {
   const categories = await getCategories();

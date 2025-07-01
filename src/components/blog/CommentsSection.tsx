@@ -1,3 +1,7 @@
+
+"use client";
+
+import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CommentsSection = ({ comments }: { comments: any[] }) => (
@@ -61,4 +65,4 @@ const CommentsSection = ({ comments }: { comments: any[] }) => (
   </div>
 );
 
-export default CommentsSection;
+export default React.memo(CommentsSection);

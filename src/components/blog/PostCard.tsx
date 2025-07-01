@@ -1,4 +1,5 @@
 
+import * as React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
@@ -61,4 +62,4 @@ const PostCard = ({ post }: PostCardProps) => {
   );
 };
 
-export default PostCard;
+export default React.memo(PostCard);
