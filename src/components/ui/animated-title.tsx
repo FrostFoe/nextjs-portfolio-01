@@ -16,7 +16,7 @@ export function AnimatedTitle({ text }: { text: string }) {
                         stiffness: 100,
                         damping: 12,
                     }}
-                    className="inline-block mr-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-fuchsia-500 to-accent"
+                    className="inline-block mr-[0.25em] text-foreground"
                 >
                     {word}
                 </motion.span>
