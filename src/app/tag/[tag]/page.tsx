@@ -7,8 +7,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
 import dynamic from "next/dynamic";
+import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"), {
+  loading: () => <SidebarLoader />,
+});
 
 type TagPageProps = {
   params: {

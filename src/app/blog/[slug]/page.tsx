@@ -26,6 +26,7 @@ import {
   Twitter,
   Facebook,
 } from "lucide-react";
+import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
 const iconMap: { [key: string]: React.ElementType } = {
   Linkedin,
@@ -78,7 +79,9 @@ const CommentsSection = dynamic(
   },
 );
 
-const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"), {
+  loading: () => <SidebarLoader />,
+});
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();

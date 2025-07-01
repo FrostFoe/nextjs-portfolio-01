@@ -1,6 +1,5 @@
 
 import PostCard from "@/components/blog/PostCard";
-import Sidebar from "@/components/blog/Sidebar";
 import { MotionDiv } from "@/components/blog/Motion";
 import { getCategories, getPostsByCategory } from "@/lib/mdx";
 import { slugify } from "@/lib/utils";
@@ -8,8 +7,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
 import dynamic from "next/dynamic";
+import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-const DynamicSidebar = dynamic(() => import("@/components/blog/Sidebar"));
+const DynamicSidebar = dynamic(() => import("@/components/blog/Sidebar"), {
+  loading: () => <SidebarLoader />,
+});
 
 type CategoryPageProps = {
   params: {

@@ -8,8 +8,11 @@ import Image from "next/image";
 import { ArrowRight, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
+import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
+const Sidebar = dynamic(() => import("@/components/blog/Sidebar"), {
+  loading: () => <SidebarLoader />,
+});
 const ParticlesContainer = dynamic(
   () =>
     import("@/components/ui/particles-container").then(
