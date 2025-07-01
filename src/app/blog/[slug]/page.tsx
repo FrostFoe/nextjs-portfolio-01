@@ -185,7 +185,7 @@ export default async function BlogPostPage({
             className="lg:col-span-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <article>
               <header>

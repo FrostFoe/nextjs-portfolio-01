@@ -27,6 +27,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
             className="text-2xl font-bold tracking-tighter"
             whileHover={{ scale: 1.05, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             {siteConfig.author.name}
           </MotionLink>
@@ -44,7 +45,7 @@ const Header = ({ posts }: { posts: Post[] }) => {
                 )}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 1 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
                 {link.name}
               </MotionLink>
@@ -54,10 +55,16 @@ const Header = ({ posts }: { posts: Post[] }) => {
           <div className="flex items-center gap-2">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Search className="h-5 w-5 text-muted-foreground" />
-                  <span className="sr-only">Search</span>
-                </Button>
+                <MotionDiv
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <Button variant="ghost" size="icon">
+                    <Search className="h-5 w-5 text-muted-foreground" />
+                    <span className="sr-only">Search</span>
+                  </Button>
+                </MotionDiv>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[625px]">
                 <SearchDialog posts={posts} />

@@ -37,6 +37,25 @@ const serviceIconMap: { [key: string]: React.ElementType } = {
   Palette,
 };
 
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
 export default function AboutPage() {
   const { author, about } = siteConfig;
 
@@ -87,22 +106,25 @@ export default function AboutPage() {
 
         <Separator className="my-16 lg:my-24" />
 
-        <MotionDiv
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="space-y-6">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <MotionDiv
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-6"
+          >
+            <MotionDiv variants={itemVariant}>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {about.aboutSection.title}
               </h2>
-              {about.aboutSection.paragraphs.map((p, i) => (
-                <p key={i} className="text-muted-foreground">
-                  {p}
-                </p>
-              ))}
+            </MotionDiv>
+            {about.aboutSection.paragraphs.map((p, i) => (
+              <MotionDiv key={i} variants={itemVariant}>
+                <p className="text-muted-foreground">{p}</p>
+              </MotionDiv>
+            ))}
+            <MotionDiv variants={itemVariant}>
               <MotionDiv
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -112,22 +134,25 @@ export default function AboutPage() {
                   {about.aboutSection.buttonText}
                 </Button>
               </MotionDiv>
-            </div>
-            <MotionDiv
-              whileHover={{ scale: 1.03, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image
-                src={about.aboutSection.image.src}
-                alt={about.aboutSection.image.alt}
-                width={600}
-                height={400}
-                className="rounded-xl shadow-lg"
-                data-ai-hint={about.aboutSection.image.hint}
-              />
             </MotionDiv>
-          </div>
-        </MotionDiv>
+          </MotionDiv>
+          <MotionDiv
+            whileHover={{ scale: 1.03, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <Image
+              src={about.aboutSection.image.src}
+              alt={about.aboutSection.image.alt}
+              width={600}
+              height={400}
+              className="rounded-xl shadow-lg"
+              data-ai-hint={about.aboutSection.image.hint}
+            />
+          </MotionDiv>
+        </div>
 
         <Separator className="my-16 lg:my-24" />
 
@@ -140,23 +165,26 @@ export default function AboutPage() {
           <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">
             {about.servicesSection.title}
           </h2>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {about.services.map((service, i) => {
+          <MotionDiv
+            className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {about.services.map((service) => {
               const ServiceIcon = serviceIconMap[service.icon];
               return (
                 <MotionDiv
                   key={service.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, amount: 0.5 }}
+                  variants={itemVariant}
                   whileHover={{
                     y: -8,
                     scale: 1.03,
                     transition: { type: "spring", stiffness: 300 },
                   }}
                 >
-                  <Card className="h-full text-center hover:shadow-primary/20">
+                  <Card className="h-full text-center hover:shadow-glow-primary transition-shadow duration-300">
                     <CardContent className="p-8">
                       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
                         {ServiceIcon && (
@@ -184,25 +212,30 @@ export default function AboutPage() {
                 </MotionDiv>
               );
             })}
-          </div>
+          </MotionDiv>
         </MotionDiv>
 
         <Separator className="my-16 lg:my-24" />
 
-        <MotionDiv
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="space-y-4">
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <MotionDiv
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-4"
+          >
+            <MotionDiv variants={itemVariant}>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {about.faqSection.title}
               </h2>
+            </MotionDiv>
+            <MotionDiv variants={itemVariant}>
               <p className="text-muted-foreground">
                 {about.faqSection.description}
               </p>
+            </MotionDiv>
+            <MotionDiv variants={itemVariant}>
               <MotionDiv
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -212,21 +245,31 @@ export default function AboutPage() {
                   {about.faqSection.buttonText}
                 </Button>
               </MotionDiv>
-            </div>
+            </MotionDiv>
+          </MotionDiv>
+          <MotionDiv
+            className="w-full"
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <Accordion type="single" collapsible className="w-full">
               {about.faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index + 1}`}>
-                  <AccordionTrigger className="text-left hover:no-underline">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                <MotionDiv key={index} variants={itemVariant}>
+                  <AccordionItem value={`item-${index + 1}`}>
+                    <AccordionTrigger className="text-left hover:no-underline">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </MotionDiv>
               ))}
             </Accordion>
-          </div>
-        </MotionDiv>
+          </MotionDiv>
+        </div>
       </main>
     </div>
   );

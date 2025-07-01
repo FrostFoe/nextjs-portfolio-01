@@ -16,6 +16,25 @@ type CategoryPageProps = {
   };
 };
 
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
 export async function generateStaticParams() {
   const categories = await getCategories();
   return Object.keys(categories).map((category) => ({
@@ -88,19 +107,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </MotionDiv>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 gap-12">
-              {posts.map((post, i) => (
-                <MotionDiv
-                  key={post.slug}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                >
+            <MotionDiv
+              className="grid grid-cols-1 gap-12"
+              variants={containerVariant}
+              initial="hidden"
+              animate="visible"
+            >
+              {posts.map((post) => (
+                <MotionDiv key={post.slug} variants={itemVariant}>
                   <PostCard post={post} />
                 </MotionDiv>
               ))}
-            </div>
+            </MotionDiv>
           </div>
           <div className="lg:col-span-1">
             <DynamicSidebar />

@@ -9,6 +9,34 @@ import dynamic from "next/dynamic";
 
 const Sidebar = dynamic(() => import("@/components/blog/Sidebar"));
 
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const heroItemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
+const postItemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
 export default async function Home() {
   const posts = await getAllPosts();
   const { home: homeConfig } = siteConfig;
@@ -18,17 +46,24 @@ export default async function Home() {
       <section className="hero-bg-pattern border-b border-border/50">
         <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 py-20 lg:grid-cols-2 lg:py-32">
           <MotionDiv
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={containerVariant}
+            initial="hidden"
+            animate="visible"
           >
-            <h1 className="text-4xl font-extrabold tracking-tighter md:text-6xl">
-              {homeConfig.hero.title}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              {homeConfig.hero.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <MotionDiv variants={heroItemVariant}>
+              <h1 className="text-4xl font-extrabold tracking-tighter md:text-6xl">
+                {homeConfig.hero.title}
+              </h1>
+            </MotionDiv>
+            <MotionDiv variants={heroItemVariant}>
+              <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+                {homeConfig.hero.description}
+              </p>
+            </MotionDiv>
+            <MotionDiv
+              variants={heroItemVariant}
+              className="mt-8 flex flex-wrap gap-4"
+            >
               <MotionDiv
                 whileHover={{ y: -2, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -51,7 +86,7 @@ export default async function Home() {
                   {homeConfig.hero.buttons.secondary.text}
                 </Button>
               </MotionDiv>
-            </div>
+            </MotionDiv>
           </MotionDiv>
           <MotionDiv
             className="hidden lg:block"
@@ -95,19 +130,19 @@ export default async function Home() {
         </MotionDiv>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 gap-12">
-              {posts.map((post, i) => (
-                <MotionDiv
-                  key={post.slug}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                >
+            <MotionDiv
+              className="grid grid-cols-1 gap-12"
+              variants={containerVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              {posts.map((post) => (
+                <MotionDiv key={post.slug} variants={postItemVariant}>
                   <PostCard post={post} />
                 </MotionDiv>
               ))}
-            </div>
+            </MotionDiv>
           </div>
           <div className="lg:col-span-1">
             <Sidebar />

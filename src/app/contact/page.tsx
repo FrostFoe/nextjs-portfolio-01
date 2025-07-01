@@ -105,9 +105,9 @@ export default function ContactPage() {
 
           <MotionDiv
             className="mx-auto mt-16 max-w-2xl rounded-xl border border-border/50 bg-card p-8 shadow-lg"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={itemVariant}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
           >
             <Form {...form}>
@@ -199,8 +199,9 @@ export default function ContactPage() {
                   </MotionDiv>
                   <MotionDiv variants={itemVariant} className="text-center">
                     <MotionDiv
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
                       className="inline-block"
                     >
                       <Button type="submit" size="lg">

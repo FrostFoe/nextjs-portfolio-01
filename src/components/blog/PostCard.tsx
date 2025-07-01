@@ -16,14 +16,16 @@ const PostCard = ({ post }: PostCardProps) => {
     <MotionLink
       href={`/blog/${slug}`}
       className="group block"
+      initial="initial"
       whileHover="hover"
+      animate="initial"
     >
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-3">
         <div className="relative h-56 w-full overflow-hidden rounded-xl md:col-span-1">
           <MotionDiv
             className="h-full w-full"
-            variants={{ hover: { scale: 1.05 } }}
-            transition={{ duration: 0.3 }}
+            variants={{ hover: { scale: 1.1 } }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           >
             <Image
               src={frontmatter.imageUrl}
@@ -38,13 +40,21 @@ const PostCard = ({ post }: PostCardProps) => {
           <Badge variant="outline" className="mb-2">
             {frontmatter.category}
           </Badge>
-          <h3 className="mb-2 text-2xl font-bold leading-snug">
+          <h3 className="mb-2 text-2xl font-bold leading-snug relative">
             <MotionDiv
-              variants={{ hover: { x: 5 } }}
+              variants={{ hover: { x: 4 } }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               {frontmatter.title}
             </MotionDiv>
+            <MotionDiv
+              className="absolute -bottom-1 left-0 h-0.5 bg-primary origin-left"
+              variants={{
+                initial: { scaleX: 0 },
+                hover: { scaleX: 1 },
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </h3>
           <div className="mb-4 flex items-center text-sm text-muted-foreground">
             <CalendarDays className="mr-2 h-4 w-4" />

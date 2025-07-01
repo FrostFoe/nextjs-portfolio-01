@@ -17,6 +17,25 @@ const iconMap: { [key: string]: React.ElementType } = {
   Dribbble,
 };
 
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
 const AuthorWidget = () => {
   const { author } = siteConfig;
   return (
@@ -93,14 +112,20 @@ const TagsWidget = async () => {
       <CardContent>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <Link key={tag} href={`/tag/${slugify(tag)}`}>
-              <Badge
-                variant="outline"
-                className="cursor-pointer hover:bg-accent font-normal"
-              >
-                {tag}
-              </Badge>
-            </Link>
+            <MotionDiv
+              key={tag}
+              whileHover={{ y: -2, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Link href={`/tag/${slugify(tag)}`}>
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer hover:bg-accent font-normal"
+                >
+                  {tag}
+                </Badge>
+              </Link>
+            </MotionDiv>
           ))}
         </div>
       </CardContent>
@@ -150,12 +175,25 @@ const PopularPostsWidget = async () => {
 
 const Sidebar = () => {
   return (
-    <aside className="space-y-8 sticky top-24">
-      <AuthorWidget />
-      <CategoriesWidget />
-      <TagsWidget />
-      <PopularPostsWidget />
-    </aside>
+    <MotionDiv
+      className="space-y-8 sticky top-24"
+      variants={containerVariant}
+      initial="hidden"
+      animate="visible"
+    >
+      <MotionDiv variants={itemVariant}>
+        <AuthorWidget />
+      </MotionDiv>
+      <MotionDiv variants={itemVariant}>
+        <CategoriesWidget />
+      </MotionDiv>
+      <MotionDiv variants={itemVariant}>
+        <TagsWidget />
+      </MotionDiv>
+      <MotionDiv variants={itemVariant}>
+        <PopularPostsWidget />
+      </MotionDiv>
+    </MotionDiv>
   );
 };
 

@@ -17,7 +17,7 @@ const Footer = () => {
           className="newsletter-bg-pattern relative mx-auto max-w-4xl rounded-2xl border border-border p-8 text-center md:p-12"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.5 }}
         >
           <div className="relative z-10">
@@ -34,10 +34,20 @@ const Footer = () => {
                 className="w-full bg-background/50 border-border h-12 text-base"
                 aria-label="Your Email"
               />
-              <Button type="submit" size="lg" className="w-full sm:w-auto h-12">
-                <Mail className="mr-2 h-4 w-4" />{" "}
-                {footer.newsletter.buttonText}
-              </Button>
+              <MotionDiv
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full sm:w-auto h-12"
+                >
+                  <Mail className="mr-2 h-4 w-4" />{" "}
+                  {footer.newsletter.buttonText}
+                </Button>
+              </MotionDiv>
             </form>
           </div>
         </MotionDiv>
@@ -47,13 +57,18 @@ const Footer = () => {
           <p className="mt-2 max-w-sm mx-auto">{author.bio}</p>
           <nav className="mt-8 flex justify-center gap-x-6 gap-y-2 flex-wrap">
             {footer.links.map((link) => (
-              <Link
+              <MotionDiv
                 key={link.name}
-                href={link.url}
-                className="hover:text-primary transition-colors"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                {link.name}
-              </Link>
+                <Link
+                  href={link.url}
+                  className="hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </MotionDiv>
             ))}
           </nav>
         </div>
