@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { slugify } from "./utils";
+import { cache } from "react";
 
 const postsDirectory = path.join(process.cwd(), "src", "content", "blog");
 
@@ -30,28 +31,30 @@ function getMdxFiles() {
     .filter((file) => path.extname(file) === ".mdx");
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-  if (!fs.existsSync(fullPath)) {
-    return null;
-  }
+export const getPostBySlug = cache(
+  async (slug: string): Promise<Post | null> => {
+    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(fullPath)) {
+      return null;
+    }
 
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
 
-  const stats = readingTime(content);
+    const stats = readingTime(content);
 
-  return {
-    slug,
-    frontmatter: {
-      ...(data as Omit<PostFrontmatter, "readingTime">),
-      readingTime: stats.text,
-    },
-    content,
-  };
-}
+    return {
+      slug,
+      frontmatter: {
+        ...(data as Omit<PostFrontmatter, "readingTime">),
+        readingTime: stats.text,
+      },
+      content,
+    };
+  },
+);
 
-export async function getAllPosts(): Promise<Post[]> {
+const _getAllPosts = async (): Promise<Post[]> => {
   const mdxFiles = getMdxFiles();
 
   const allPostsData = await Promise.all(
@@ -69,7 +72,8 @@ export async function getAllPosts(): Promise<Post[]> {
       new Date(postB.frontmatter.date).getTime() -
       new Date(postA.frontmatter.date).getTime(),
   );
-}
+};
+export const getAllPosts = cache(_getAllPosts);
 
 export async function getCategories(): Promise<Record<string, number>> {
   const posts = await getAllPosts();
