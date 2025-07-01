@@ -17,9 +17,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/content/config";
 import {
   Check,
+  HelpCircle,
   Laptop,
   Linkedin,
   Palette,
+  Rocket,
   Smartphone,
   Twitter,
   Dribbble,
@@ -136,6 +138,7 @@ export default function AboutPage() {
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button variant="outline" size="lg" className="mt-4">
+                  <Rocket className="mr-2 h-5 w-5" />
                   {about.aboutSection.buttonText}
                 </Button>
               </MotionDiv>
@@ -256,6 +259,7 @@ export default function AboutPage() {
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button variant="outline" className="!mt-6">
+                  <HelpCircle className="mr-2 h-5 w-5" />
                   {about.faqSection.buttonText}
                 </Button>
               </MotionDiv>

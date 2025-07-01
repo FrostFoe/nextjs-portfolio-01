@@ -1,8 +1,8 @@
 
 export const siteConfig = {
-  title: "FrostFoe | Crafting Digital Cosmos",
+  title: "FrostFoe | Crafting Digital Cosmos 🌌",
   description:
-    "Explore the cosmos of UI/UX design, front-end development, and modern web technologies with FrostFoe. A journey through insightful articles and tutorials.",
+    "Explore the cosmos of UI/UX design, front-end development, and modern web technologies with FrostFoe. A journey through insightful articles and tutorials. 🚀",
   url: "https://your-awesome-blog.com",
   keywords: [
     "UI/UX Design",
@@ -17,7 +17,7 @@ export const siteConfig = {
   author: {
     name: "FrostFoe",
     avatar: "https://placehold.co/128x128.png",
-    bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights.",
+    bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights. ✨",
     email: "frost.foe@example.com",
     social: [
       { name: "LinkedIn", url: "#", icon: "Linkedin" },
@@ -36,9 +36,9 @@ export const siteConfig = {
 
   home: {
     hero: {
-      title: "Crafting Digital Cosmos, One Pixel at a Time.",
+      title: "Crafting Digital Cosmos, One Pixel at a Time. 🪐",
       description:
-        "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences that feel out of this world.",
+        "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences that feel out of this world. 👽",
       buttons: {
         primary: { text: "My Work", url: "#" },
         secondary: { text: "Subscribe", url: "#" },
@@ -50,14 +50,14 @@ export const siteConfig = {
       },
     },
     latestArticles: {
-      title: "Latest Dispatches",
+      title: "Latest Dispatches 📡",
       description:
         "A collection of my latest thoughts on design, tech, and everything in between, transmitted from the digital frontier.",
     },
   },
 
   blog: {
-    sharePostText: "Share this post",
+    sharePostText: "Share this post 🚀",
     shareLinks: [
       { name: "LinkedIn", url: "#", icon: "Linkedin" },
       { name: "Twitter", url: "#", icon: "Twitter" },
@@ -67,7 +67,7 @@ export const siteConfig = {
 
   about: {
     intro:
-      "Crafting digital experiences that transform businesses and delight users. Specializing in user-centered design with 8+ years of expertise in creating intuitive interfaces.",
+      "Crafting digital experiences that transform businesses and delight users. ✨ Specializing in user-centered design with 8+ years of expertise in creating intuitive interfaces.",
     aboutSection: {
       title: "About Me",
       paragraphs: [
@@ -82,7 +82,7 @@ export const siteConfig = {
       },
     },
     servicesSection: {
-      title: "How I Can Help",
+      title: "How I Can Help 🧑‍🚀",
     },
     services: [
       {
@@ -120,7 +120,7 @@ export const siteConfig = {
       },
     ],
     faqSection: {
-      title: "Frequently Asked Questions",
+      title: "Frequently Asked Questions ❓",
       description:
         "Get answers to common questions about my design process, timeline, and collaboration approach.",
       buttonText: "Ask a Question",
@@ -150,7 +150,7 @@ export const siteConfig = {
   },
 
   contact: {
-    title: "Get in Touch",
+    title: "Get in Touch 👋",
     description:
       "Have a question, project idea, or just want to say hi? Fill out the form below, and I'll get back to you as soon as possible.",
     form: {
@@ -162,9 +162,9 @@ export const siteConfig = {
 
   footer: {
     newsletter: {
-      title: "Join the Cosmos",
+      title: "Join the Cosmos 🌌",
       description:
-        "Get the latest design tips, tutorials, and insights delivered straight to your inbox. No spam, just stardust.",
+        "Get the latest design tips, tutorials, and insights delivered straight to your inbox. No spam, just stardust. ✨",
       buttonText: "Subscribe",
     },
     links: [
@@ -177,7 +177,7 @@ export const siteConfig = {
   },
 
   termsPage: {
-    title: "Terms of Service",
+    title: "Terms of Service 📜",
     description: "Our terms of service.",
     content: [
       {
@@ -196,7 +196,7 @@ export const siteConfig = {
   },
 
   privacyPage: {
-    title: "Privacy Policy",
+    title: "Privacy Policy 🛡️",
     description: "How we handle your data.",
     content: [
       {
@@ -211,7 +211,7 @@ export const siteConfig = {
   },
 
   docsPage: {
-    title: "Documentation",
+    title: "Documentation 📄",
     description: "Documentation for the site.",
     content: [
       {
@@ -226,8 +226,8 @@ export const siteConfig = {
   },
 
   notFoundPage: {
-    title: "404 - Lost in Space",
-    description: "Oops! Looks like you've ventured into an uncharted quadrant.",
+    title: "404 - Lost in Space 👽",
+    description: "Oops! Looks like you've ventured into an uncharted quadrant. 🧭",
     buttonText: "Go Back Home",
   },
 };

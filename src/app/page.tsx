@@ -5,7 +5,7 @@ import { MotionDiv } from "@/components/blog/Motion";
 import { siteConfig } from "@/content/config";
 import { getAllPosts } from "@/lib/mdx";
 import Image from "next/image";
-import { ArrowRight, Rss } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
 import { ParticlesContainer } from "@/components/ui/particles-container";
@@ -89,7 +89,7 @@ export default async function Home() {
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
                 <Button size="lg" variant="outline">
-                  <Rss className="mr-2 h-5 w-5" />{" "}
+                  <Mail className="mr-2 h-5 w-5" />{" "}
                   {homeConfig.hero.buttons.secondary.text}
                 </Button>
               </MotionDiv>

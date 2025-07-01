@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
+import { ArrowUpRight, Rocket } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Showcase",
@@ -86,8 +87,8 @@ export default function ShowcasePage() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, type: "spring" }}
         >
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-            My Showcase
+          <h1 className="inline-flex items-center gap-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            My Showcase <Rocket className="h-10 w-10" />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
             A selection of projects that I'm proud of. Each one represents a
@@ -109,7 +110,7 @@ export default function ShowcasePage() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group"
+                className="group block"
                 whileHover={{ scale: 1.03, y: -8, rotateY: 5, rotateX: -3 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 style={{ transformStyle: "preserve-3d" }}
@@ -133,7 +134,10 @@ export default function ShowcasePage() {
                       whileHover={{ z: 15 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     >
-                      <h3 className="text-xl font-bold">{item.title}</h3>
+                      <h3 className="flex items-center justify-between text-xl font-bold">
+                        {item.title}
+                        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+                      </h3>
                       <p className="mt-2 text-muted-foreground">
                         {item.description}
                       </p>
