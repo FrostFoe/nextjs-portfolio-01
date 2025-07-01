@@ -3,15 +3,15 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/blog/Header";
 import { siteConfig } from "@/content/config";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { getAllPosts } from "@/lib/mdx";
 import dynamic from "next/dynamic";
 
 const Footer = dynamic(() => import("@/components/blog/Footer"));
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ export default async function RootLayout({
   const posts = await getAllPosts();
 
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
+    <html lang="en" className={`${spaceGrotesk.variable} dark`}>
       <head />
       <body className="font-body bg-background text-foreground antialiased">
         <div className="flex flex-col min-h-screen">

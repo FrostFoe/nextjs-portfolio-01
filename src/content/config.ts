@@ -1,7 +1,7 @@
 export const siteConfig = {
-  title: "FrostFoe | Crafting the Future of UI/UX Design",
+  title: "FrostFoe | Crafting Digital Cosmos",
   description:
-    "Explore insightful articles and tutorials on UI/UX design, front-end development, and modern web technologies by FrostFoe.",
+    "Explore the cosmos of UI/UX design, front-end development, and modern web technologies with FrostFoe. A journey through insightful articles and tutorials.",
   url: "https://your-awesome-blog.com",
   keywords: [
     "UI/UX Design",
@@ -10,6 +10,7 @@ export const siteConfig = {
     "Next.js",
     "Framer Motion",
     "Design Systems",
+    "Creative Development",
   ],
 
   author: {
@@ -33,9 +34,9 @@ export const siteConfig = {
 
   home: {
     hero: {
-      title: "Code, Pixels, and a Dash of Magic.",
+      title: "Crafting Digital Cosmos, One Pixel at a Time.",
       description:
-        "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences.",
+        "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences that feel out of this world.",
       buttons: {
         primary: { text: "My Work", url: "#" },
         secondary: { text: "Subscribe", url: "#" },
@@ -47,9 +48,9 @@ export const siteConfig = {
       },
     },
     latestArticles: {
-      title: "Latest Articles",
+      title: "Latest Dispatches",
       description:
-        "A collection of my latest thoughts on design, tech, and everything in between.",
+        "A collection of my latest thoughts on design, tech, and everything in between, transmitted from the digital frontier.",
     },
   },
 
@@ -159,9 +160,9 @@ export const siteConfig = {
 
   footer: {
     newsletter: {
-      title: "Join Newsletter",
+      title: "Join the Cosmos",
       description:
-        "Get the latest design tips, tutorials, and insights delivered straight to your inbox every week.",
+        "Get the latest design tips, tutorials, and insights delivered straight to your inbox. No spam, just stardust.",
       buttonText: "Subscribe",
     },
     links: [
@@ -223,8 +224,8 @@ export const siteConfig = {
   },
 
   notFoundPage: {
-    title: "404 - Page Not Found",
-    description: "Oops! Looks like you've ventured into uncharted territory.",
+    title: "404 - Lost in Space",
+    description: "Oops! Looks like you've ventured into an uncharted quadrant.",
     buttonText: "Go Back Home",
   },
 };

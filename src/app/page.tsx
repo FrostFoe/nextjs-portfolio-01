@@ -51,7 +51,7 @@ export default async function Home() {
             animate="visible"
           >
             <MotionDiv variants={heroItemVariant}>
-              <h1 className="text-4xl font-extrabold tracking-tighter md:text-6xl">
+              <h1 className="text-4xl font-extrabold tracking-tighter md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary via-fuchsia-500 to-accent">
                 {homeConfig.hero.title}
               </h1>
             </MotionDiv>
