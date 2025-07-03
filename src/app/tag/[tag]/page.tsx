@@ -6,8 +6,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/config";
 import { Suspense } from "react";
-import Sidebar from "@/components/blog/Sidebar";
-import { SidebarLoader } from "@/components/blog/SidebarLoader";
+import Sidebar from "@/components/blog/sidebar/Sidebar";
+import { SidebarLoader } from "@/components/blog/sidebar/SidebarLoader";
 
 type TagPageProps = {
   params: {
