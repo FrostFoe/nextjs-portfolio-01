@@ -7,9 +7,9 @@ import Image from "next/image";
 import { ArrowRight, Mail } from "lucide-react";
 import dynamic from "next/dynamic";
 import { AnimatedTitle } from "@/components/ui/animated-title";
-import { SidebarLoader } from "@/components/blog/SidebarLoader";
+import { SidebarLoader } from "@/components/blog/sidebar/SidebarLoader";
 import { Suspense } from "react";
-import Sidebar from "@/components/blog/Sidebar";
+import Sidebar from "@/components/blog/sidebar/Sidebar";
 
 const ParticlesContainer = dynamic(
   () =>
@@ -107,9 +107,11 @@ export default async function Home() {
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
-                <Button size="lg" variant="outline">
-                  <Mail className="mr-2 h-5 w-5" />{" "}
-                  {homeConfig.hero.buttons.secondary.text}
+                <Button size="lg" variant="outline" asChild>
+                  <a href={homeConfig.hero.buttons.secondary.url}>
+                    <Mail className="mr-2 h-5 w-5" />{" "}
+                    {homeConfig.hero.buttons.secondary.text}
+                  </a>
                 </Button>
               </MotionDiv>
             </MotionDiv>

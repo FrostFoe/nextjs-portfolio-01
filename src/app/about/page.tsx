@@ -136,9 +136,11 @@ export default function AboutPage() {
                 className="inline-block"
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
-                <Button variant="outline" size="lg" className="mt-4">
-                  <Rocket className="mr-2 h-5 w-5" />
-                  {about.aboutSection.buttonText}
+                <Button variant="outline" size="lg" className="mt-4" asChild>
+                  <Link href="/contact">
+                    <Rocket className="mr-2 h-5 w-5" />
+                    {about.aboutSection.buttonText}
+                  </Link>
                 </Button>
               </MotionDiv>
             </MotionDiv>
@@ -257,9 +259,11 @@ export default function AboutPage() {
                 className="inline-block"
                 style={{ perspective: "800px", transformStyle: "preserve-3d" }}
               >
-                <Button variant="outline" className="!mt-6">
-                  <HelpCircle className="mr-2 h-5 w-5" />
-                  {about.faqSection.buttonText}
+                <Button variant="outline" className="!mt-6" asChild>
+                  <Link href="/contact">
+                    <HelpCircle className="mr-2 h-5 w-5" />
+                    {about.faqSection.buttonText}
+                  </Link>
                 </Button>
               </MotionDiv>
             </MotionDiv>

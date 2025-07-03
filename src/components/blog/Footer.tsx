@@ -6,14 +6,38 @@ import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
 import { siteConfig } from "@/content/config";
 import { Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import React from "react";
 
 const Footer = () => {
   const { footer, author } = siteConfig;
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email");
+
+    if (email) {
+      toast({
+        title: "Subscribed! 🎉",
+        description: "Thanks for joining the cosmos. Welcome aboard!",
+      });
+      e.currentTarget.reset();
+    } else {
+      toast({
+        title: "Oops!",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <footer className="hero-bg-pattern border-t border-border/50 pt-16 text-sm text-muted-foreground">
       <div className="container mx-auto px-4">
         <MotionDiv
+          id="newsletter"
           className="newsletter-bg-pattern relative mx-auto max-w-4xl rounded-2xl border border-border p-8 text-center md:p-12"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,9 +51,13 @@ const Footer = () => {
             <p className="mt-2 max-w-lg mx-auto text-muted-foreground">
               {footer.newsletter.description}
             </p>
-            <form className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:max-w-md sm:mx-auto">
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:max-w-md sm:mx-auto"
+            >
               <Input
                 type="email"
+                name="email"
                 placeholder="Your Email"
                 className="w-full bg-background/50 border-border h-12 text-base"
                 aria-label="Your Email"

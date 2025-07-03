@@ -41,8 +41,8 @@ export const siteConfig = {
       description:
         "Welcome to my digital playground. I'm FrostFoe, a designer and developer obsessed with building delightful, human-centered experiences that feel out of this world. 👽",
       buttons: {
-        primary: { text: "My Work", url: "#" },
-        secondary: { text: "Subscribe", url: "#" },
+        primary: { text: "My Work", url: "/showcase" },
+        secondary: { text: "Subscribe", url: "/#newsletter" },
       },
       image: {
         src: "https://placehold.co/600x400.png",
