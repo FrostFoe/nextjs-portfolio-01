@@ -177,6 +177,24 @@ export default async function BlogPostPage({
 
   const { frontmatter, content, slug } = post;
   const { blog: blogConfig } = siteConfig;
+  const postUrl = `${siteConfig.url}/blog/${slug}`;
+
+  const getShareUrl = (platform: string) => {
+    const encodedUrl = encodeURIComponent(postUrl);
+    const encodedTitle = encodeURIComponent(frontmatter.title);
+    const encodedDescription = encodeURIComponent(frontmatter.description);
+
+    switch (platform.toLowerCase()) {
+      case "linkedin":
+        return `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}`;
+      case "twitter":
+        return `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+      case "facebook":
+        return `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+      default:
+        return "#";
+    }
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -188,7 +206,7 @@ export default async function BlogPostPage({
     image: frontmatter.imageUrl.startsWith("http")
       ? frontmatter.imageUrl
       : `${siteConfig.url}${frontmatter.imageUrl}`,
-    url: `${siteConfig.url}/blog/${slug}`,
+    url: postUrl,
     author: {
       "@type": "Person",
       name: frontmatter.author,
@@ -290,6 +308,7 @@ export default async function BlogPostPage({
                 <div className="flex items-center gap-1">
                   {blogConfig.shareLinks.map((link) => {
                     const Icon = iconMap[link.icon];
+                    const shareUrl = getShareUrl(link.name);
                     return (
                       <MotionDiv
                         key={link.name}
@@ -298,7 +317,9 @@ export default async function BlogPostPage({
                       >
                         <Button variant="ghost" size="sm" asChild>
                           <Link
-                            href={link.url}
+                            href={shareUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex items-center gap-2"
                           >
                             {Icon && <Icon className="h-4 w-4" />}

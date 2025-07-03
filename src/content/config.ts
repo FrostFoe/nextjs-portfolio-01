@@ -60,9 +60,9 @@ export const siteConfig = {
   blog: {
     sharePostText: "Share this post 🚀",
     shareLinks: [
-      { name: "LinkedIn", url: "#", icon: "Linkedin" },
-      { name: "Twitter", url: "#", icon: "Twitter" },
-      { name: "Facebook", url: "#", icon: "Facebook" },
+      { name: "LinkedIn", icon: "Linkedin" },
+      { name: "Twitter", icon: "Twitter" },
+      { name: "Facebook", icon: "Facebook" },
     ],
   },
 
