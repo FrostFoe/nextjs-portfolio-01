@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -8,10 +9,17 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/content/config";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import SearchDialog from "./SearchDialog";
-import { Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Header = () => {
   const pathname = usePathname();
+  const [isSheetOpen, setIsSheetOpen] = React.useState(false);
 
   return (
     <MotionDiv
@@ -69,6 +77,37 @@ const Header = () => {
                 <SearchDialog />
               </DialogContent>
             </Dialog>
+
+            <div className="md:hidden">
+              <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Open menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                  <div className="mt-8 flex flex-col gap-4">
+                    {siteConfig.navLinks.map((link) => (
+                      <SheetClose asChild key={link.name}>
+                        <Link
+                          href={link.href}
+                          className={cn(
+                            "rounded-md px-4 py-2 text-lg font-medium transition-colors hover:text-primary",
+                            pathname === link.href
+                              ? "text-primary"
+                              : "text-muted-foreground",
+                          )}
+                          onClick={() => setIsSheetOpen(false)}
+                        >
+                          {link.name}
+                        </Link>
+                      </SheetClose>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
       </header>
