@@ -25,6 +25,7 @@ export type PostFrontmatter = {
   author: string;
   tags: string[];
   readingTime: string;
+  comments?: boolean;
 };
 
 export type Post = {

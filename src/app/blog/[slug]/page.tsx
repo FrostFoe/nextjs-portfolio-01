@@ -311,21 +311,25 @@ export default async function BlogPostPage({
                 </div>
               </div>
 
-              <Separator className="my-8" />
-              <MotionDiv
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <CommentsSection comments={MOCK_COMMENTS} />
-              </MotionDiv>
-              <MotionDiv
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-              >
-                <CommentForm />
-              </MotionDiv>
+              {frontmatter.comments !== false && (
+                <>
+                  <Separator className="my-8" />
+                  <MotionDiv
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
+                  >
+                    <CommentsSection comments={MOCK_COMMENTS} />
+                  </MotionDiv>
+                  <MotionDiv
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7, duration: 0.5 }}
+                  >
+                    <CommentForm />
+                  </MotionDiv>
+                </>
+              )}
             </article>
           </MotionDiv>
 
