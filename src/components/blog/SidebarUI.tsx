@@ -7,11 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/content/config";
-import type { Post } from "@/lib/mdx";
+import type { Post } from "@/lib/types";
 import { format } from "date-fns";
 import { slugify } from "@/lib/utils";
 import { Linkedin, Palette, Twitter, Dribbble } from "lucide-react";
-import { MotionDiv } from "./Motion";
+import { MotionDiv } from "@/components/blog/Motion";
 
 const iconMap: { [key: string]: React.ElementType } = {
   Linkedin,

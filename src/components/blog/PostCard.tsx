@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
-import type { Post } from "@/lib/mdx";
+import type { Post } from "@/lib/types";
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
 
@@ -16,7 +16,7 @@ const PostCard = ({ post }: PostCardProps) => {
     <MotionLink href={`/blog/${slug}`} className="group block">
       <MotionDiv
         className="grid grid-cols-1 items-center gap-8 rounded-lg border border-border bg-card p-6 shadow-md transition-shadow duration-300 group-hover:shadow-2xl group-hover:shadow-primary/10 md:grid-cols-3"
-        whileHover={{ y: -5, scale: 1.02 }}
+        whileHover={{ y: -5, scale: 1.01 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
         <div className="relative h-56 w-full overflow-hidden rounded-xl md:col-span-1">

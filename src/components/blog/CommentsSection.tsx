@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { Comment } from "@/lib/types";
 
-const CommentsSection = ({ comments }: { comments: any[] }) => (
+const CommentsSection = ({ comments }: { comments: Comment[] }) => (
   <div className="mt-12">
     <h3 className="text-xl font-bold mb-6">Comments ({comments.length})</h3>
     <div className="space-y-8">

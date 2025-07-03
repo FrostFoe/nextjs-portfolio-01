@@ -17,6 +17,7 @@ import { slugify } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Metadata } from "next";
+import { type Comment } from "@/lib/types";
 import {
   CalendarDays,
   User,
@@ -27,8 +28,8 @@ import {
   Facebook,
 } from "lucide-react";
 import { Suspense } from "react";
-import Sidebar from "@/components/blog/Sidebar";
-import { SidebarLoader } from "@/components/blog/SidebarLoader";
+import Sidebar from "@/components/blog/sidebar/Sidebar";
+import { SidebarLoader } from "@/components/blog/sidebar/SidebarLoader";
 
 const iconMap: { [key: string]: React.ElementType } = {
   Linkedin,
@@ -70,16 +71,44 @@ const CommentsSectionLoader = () => (
   </div>
 );
 
-const CommentForm = dynamic(() => import("@/components/blog/CommentForm"), {
-  loading: () => <CommentFormLoader />,
-});
+const CommentForm = dynamic(
+  () => import("@/components/blog/comments/CommentForm"),
+  {
+    loading: () => <CommentFormLoader />,
+  },
+);
 
 const CommentsSection = dynamic(
-  () => import("@/components/blog/CommentsSection"),
+  () => import("@/components/blog/comments/CommentsSection"),
   {
     loading: () => <CommentsSectionLoader />,
   },
 );
+
+const MOCK_COMMENTS: Comment[] = [
+  {
+    id: "1",
+    author: "Jane Doe",
+    avatarUrl: "https://placehold.co/40x40.png",
+    date: "2 days ago",
+    text: "This was an amazing read! I learned so much about Framer Motion. The 3D effects are especially cool. Can't wait to try them out on my own projects.",
+    reply: {
+      id: "r1",
+      author: "FrostFoe",
+      avatarUrl:
+        "https://raw.githubusercontent.com/FrostFoe/localhost/refs/heads/main/images/logo.png",
+      date: "1 day ago",
+      text: "Thanks, Jane! I'm so glad you found it helpful. Let me know if you have any questions when you start implementing them. Happy coding!",
+    },
+  },
+  {
+    id: "2",
+    author: "John Smith",
+    avatarUrl: "https://placehold.co/40x40.png",
+    date: "4 days ago",
+    text: "Incredible insights into modern web development. The combination of Next.js and Tailwind is powerful, and your explanations are crystal clear.",
+  },
+];
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -288,7 +317,7 @@ export default async function BlogPostPage({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
               >
-                <CommentsSection comments={[]} />
+                <CommentsSection comments={MOCK_COMMENTS} />
               </MotionDiv>
               <MotionDiv
                 initial={{ opacity: 0 }}

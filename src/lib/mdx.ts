@@ -4,26 +4,9 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { slugify } from "./utils";
 import { cache } from "react";
+import type { Post, PostFrontmatter } from "./types";
 
 const postsDirectory = path.join(process.cwd(), "src", "content", "blog");
-
-export type PostFrontmatter = {
-  title: string;
-  date: string;
-  description: string;
-  imageUrl: string;
-  imageHint: string;
-  category: string;
-  author: string;
-  tags: string[];
-  readingTime: string;
-};
-
-export type Post = {
-  slug: string;
-  frontmatter: PostFrontmatter;
-  content: string;
-};
 
 function getMdxFiles() {
   return fs

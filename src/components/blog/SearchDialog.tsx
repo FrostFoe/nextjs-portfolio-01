@@ -10,9 +10,9 @@ import {
   DialogDescription,
   DialogClose,
 } from "@/components/ui/dialog";
-import type { Post } from "@/lib/mdx";
+import type { Post } from "@/lib/types";
 import { format } from "date-fns";
-import { MotionDiv } from "./Motion";
+import { MotionDiv } from "@/components/blog/Motion";
 import { Search } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
