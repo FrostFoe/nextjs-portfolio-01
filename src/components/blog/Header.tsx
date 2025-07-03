@@ -8,7 +8,6 @@ import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/content/config";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import SearchDialog from "./SearchDialog";
 import { Menu, Search } from "lucide-react";
 import {
   Sheet,
@@ -16,10 +15,20 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import dynamic from "next/dynamic";
+
+const SearchDialog = dynamic(() => import("./SearchDialog"), {
+  loading: () => (
+    <div className="h-[400px] w-full flex items-center justify-center">
+      <p className="text-muted-foreground">Loading Search...</p>
+    </div>
+  ),
+});
 
 const Header = () => {
   const pathname = usePathname();
   const [isSheetOpen, setIsSheetOpen] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
   return (
     <MotionDiv
@@ -60,7 +69,7 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Dialog>
+            <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
               <DialogTrigger asChild>
                 <MotionDiv
                   whileHover={{ scale: 1.1 }}
@@ -74,7 +83,7 @@ const Header = () => {
                 </MotionDiv>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[625px]">
-                <SearchDialog />
+                {isSearchOpen && <SearchDialog />}
               </DialogContent>
             </Dialog>
 

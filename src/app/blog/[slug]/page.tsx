@@ -28,8 +28,8 @@ import {
   Facebook,
 } from "lucide-react";
 import { Suspense } from "react";
-import Sidebar from "@/components/blog/sidebar/Sidebar";
-import { SidebarLoader } from "@/components/blog/sidebar/SidebarLoader";
+import Sidebar from "@/components/blog/Sidebar";
+import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
 const iconMap: { [key: string]: React.ElementType } = {
   Linkedin,
