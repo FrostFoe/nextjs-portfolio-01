@@ -1,7 +1,10 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
-import { MotionDiv } from "@/components/blog/Motion";
+import dynamic from "next/dynamic";
+const MotionDiv = dynamic(() => import("@/components/blog/Motion").then((mod) => mod.MotionDiv), {
+  ssr: false,
+});
 
 const contentBlockVariant = {
   hidden: { opacity: 0, y: 15 },

@@ -72,18 +72,13 @@ const CommentsSectionLoader = () => (
 );
 
 const CommentForm = dynamic(
-  () => import("@/components/blog/comments/CommentForm"),
+  () => import("@/components/blog/CommentForm"),
   {
     loading: () => <CommentFormLoader />,
   },
 );
 
-const CommentsSection = dynamic(
-  () => import("@/components/blog/comments/CommentsSection"),
-  {
-    loading: () => <CommentsSectionLoader />,
-  },
-);
+import CommentsSection from "@/components/blog/CommentsSection";
 
 const MOCK_COMMENTS: Comment[] = [
   {

@@ -1,5 +1,10 @@
 const createMDX = require("@next/mdx");
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: false,
+});
+
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   images: {
@@ -22,4 +27,4 @@ const nextConfig = {
 
 const withMDX = createMDX({});
 
-module.exports = withMDX(nextConfig);
+module.exports = withBundleAnalyzer(withMDX(nextConfig));

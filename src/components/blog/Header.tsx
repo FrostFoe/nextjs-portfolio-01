@@ -4,7 +4,12 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { MotionDiv, MotionLink } from "@/components/blog/Motion";
+const MotionDiv = dynamic(() => import("@/components/blog/Motion").then((mod) => mod.MotionDiv), {
+  ssr: false,
+});
+const MotionLink = dynamic(() => import("@/components/blog/Motion").then((mod) => mod.MotionLink), {
+  ssr: false,
+});
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/content/config";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
