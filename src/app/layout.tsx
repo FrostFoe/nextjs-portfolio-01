@@ -57,6 +57,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { NotFoundProvider } from "@/lib/not-found-context";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,11 +72,13 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <Spotlight />
-        <div className="relative z-40 flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <NotFoundProvider>
+          <div className="relative z-40 flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </NotFoundProvider>
         <Toaster />
       </body>
     </html>

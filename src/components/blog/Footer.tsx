@@ -8,10 +8,16 @@ import { siteConfig } from "@/content/config";
 import { Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import React from "react";
+import { useNotFound } from "@/lib/not-found-context";
 
 const Footer = () => {
   const { footer, author } = siteConfig;
   const { toast } = useToast();
+  const { isNotFoundPage } = useNotFound();
+
+  if (isNotFoundPage) {
+    return null; // Don't render footer on 404 page
+  }
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -5,9 +5,18 @@ import { Button } from "@/components/ui/button";
 import { MotionDiv } from "@/components/blog/Motion";
 import { siteConfig } from "@/content/config";
 import { Compass, Home } from "lucide-react";
+import { useNotFound } from "@/lib/not-found-context";
+import { useEffect } from "react";
 
 export default function NotFound() {
   const { notFoundPage } = siteConfig;
+  const { setIsNotFoundPage } = useNotFound();
+
+  useEffect(() => {
+    setIsNotFoundPage(true);
+    return () => setIsNotFoundPage(false);
+  }, [setIsNotFoundPage]);
+
   return (
     <div className="h-full w-full flex items-center justify-center text-center hero-bg-pattern">
       <MotionDiv
