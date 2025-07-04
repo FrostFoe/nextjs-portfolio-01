@@ -2,7 +2,7 @@ export const siteConfig = {
   title: "FrostFoe | Crafting Digital Cosmos 🌌",
   description:
     "Explore the cosmos of UI/UX design, front-end development, and modern web technologies with FrostFoe. A journey through insightful articles and tutorials. 🚀",
-  url: "https://your-awesome-blog.com",
+  url: "https://ff-nextjs-portfolio-01.netlify.app/",
   keywords: [
     "UI/UX Design",
     "Web Development",
@@ -18,7 +18,7 @@ export const siteConfig = {
     avatar:
       "https://raw.githubusercontent.com/FrostFoe/localhost/refs/heads/main/images/logo.png",
     bio: "UI/UX designer with 8+ years of experience, passionate about creating user-centered designs and sharing insights. ✨",
-    email: "frost.foe@example.com",
+    email: "frostfoe@gmail.com",
     social: [
       { name: "LinkedIn", url: "#", icon: "Linkedin" },
       { name: "Behance", url: "#", icon: "Palette" },
@@ -45,7 +45,7 @@ export const siteConfig = {
         secondary: { text: "Subscribe", url: "/#newsletter" },
       },
       image: {
-        src: "https://placehold.co/600x400.png",
+        src: "https://raw.githubusercontent.com/FrostFoe/localhost/refs/heads/main/images/banner.png",
         alt: "Hero Image",
         hint: "abstract design illustration",
       },
@@ -77,7 +77,7 @@ export const siteConfig = {
       ],
       buttonText: "Start Collaborating!",
       image: {
-        src: "https://placehold.co/600x400.png",
+        src: "https://raw.githubusercontent.com/FrostFoe/localhost/refs/heads/main/images/banner.png",
         alt: "Cute robot mascot",
         hint: "cute robot street",
       },
