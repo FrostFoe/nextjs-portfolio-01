@@ -11,13 +11,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "placehold.co",
+        hostname: "img-c.udemycdn.com",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "raw.githubusercontent.com",
+        hostname: "www.shutterstock.com",
         port: "",
         pathname: "/**",
       },
