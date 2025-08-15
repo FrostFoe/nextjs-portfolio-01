@@ -6,9 +6,9 @@ import type { Post } from "@/lib/types";
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
 
-type PostCardProps = {
+interface PostCardProps {
   post: Post;
-};
+}
 
 const PostCard = ({ post }: PostCardProps) => {
   const { slug, frontmatter } = post;

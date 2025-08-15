@@ -26,14 +26,14 @@ import {
   Dribbble,
 } from "lucide-react";
 
-const iconMap: { [key: string]: React.ElementType } = {
+const iconMap: Record<string, React.ElementType> = {
   Linkedin,
   Palette,
   Twitter,
   Dribbble,
 };
 
-const serviceIconMap: { [key: string]: React.ElementType } = {
+const serviceIconMap: Record<string, React.ElementType> = {
   Laptop,
   Smartphone,
   Palette,

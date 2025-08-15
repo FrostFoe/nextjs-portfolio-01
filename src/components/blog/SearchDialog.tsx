@@ -127,7 +127,7 @@ export default function SearchDialog() {
               ))
             ) : (
               <div className="text-center py-10 text-muted-foreground">
-                <p className="text-lg">No results found for "{query}"</p>
+                <p className="text-lg">No results found for &quot;{query}&quot;</p>
                 <p className="text-sm">Try searching for something else.</p>
               </div>
             )

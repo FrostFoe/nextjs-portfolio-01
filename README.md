@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://img-c.udemycdn.com/course/750x422/4486772_7ce3_7.jpg" alt="FrostFoe Banner" width="100%" />
+  <img src="/images/udemy/udemy-course-4486772_7ce3_7.webp" alt="FrostFoe Banner" width="100%" />
 </p>
 
 <p align="center">

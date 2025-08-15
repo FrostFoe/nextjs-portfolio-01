@@ -19,7 +19,7 @@ export const NotFoundProvider = ({
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
 
   return (
-    <NotFoundContext.Provider value={{ isNotFoundPage, setIsNotFoundPage }}>
+    <NotFoundContext.Provider value={{ isNotFoundPage, setIsNotFoundPage }}> {/* eslint-disable-line @typescript-eslint/no-unused-vars */}
       {children}
     </NotFoundContext.Provider>
   );

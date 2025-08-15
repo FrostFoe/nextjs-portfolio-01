@@ -13,7 +13,7 @@ import { slugify } from "@/lib/utils";
 import { Linkedin, Palette, Twitter, Dribbble } from "lucide-react";
 import { MotionDiv } from "@/components/blog/Motion";
 
-const iconMap: { [key: string]: React.ElementType } = {
+const iconMap: Record<string, React.ElementType> = {
   Linkedin,
   Palette,
   Twitter,
@@ -175,11 +175,11 @@ const PopularPostsWidget = ({ popularPosts }: { popularPosts: Post[] }) => {
   );
 };
 
-type SidebarUIProps = {
+interface SidebarUIProps {
   categories: Record<string, number>;
   tags: string[];
   popularPosts: Post[];
-};
+}
 
 export default function SidebarUI({
   categories,

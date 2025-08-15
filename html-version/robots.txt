@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://ff-nextjs-portfolio-01.netlify.app//sitemap.xml

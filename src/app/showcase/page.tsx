@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { Card, CardContent } from "@/components/ui/card";
 import { MotionDiv, MotionLink } from "@/components/blog/Motion";
 import type { Metadata } from "next";
-import { siteConfig } from "@/content/config";
 import { ArrowUpRight, Rocket } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -96,7 +95,7 @@ export default function ShowcasePage() {
             My Showcase <Rocket className="h-10 w-10" />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            A selection of projects that I'm proud of. Each one represents a
+            A selection of projects that I&apos;m proud of. Each one represents a
             unique challenge and a story of creative problem-solving.
           </p>
         </MotionDiv>

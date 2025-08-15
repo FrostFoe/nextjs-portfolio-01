@@ -9,11 +9,11 @@ import { Suspense } from "react";
 import Sidebar from "@/components/blog/Sidebar";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-type TagPageProps = {
+interface TagPageProps {
   params: {
     tag: string;
   };
-};
+}
 
 const containerVariant = {
   hidden: { opacity: 0 },
@@ -53,8 +53,8 @@ export async function generateMetadata({
     return {};
   }
 
-  const title = `Posts tagged: "${originalTag}"`;
-  const description = `Explore all articles tagged with ${originalTag} on ${siteConfig.author.name}'s blog.`;
+  const title = `Posts tagged: &quot;${originalTag}&quot;`;
+  const description = `Explore all articles tagged with ${originalTag} on ${siteConfig.author.name}&apos;s blog.`;
 
   return {
     title,
@@ -94,7 +94,7 @@ export default async function TagPage({ params }: TagPageProps) {
           viewport={{ once: true, amount: 0.5 }}
         >
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight">
-            Posts tagged: "{originalTag}"
+            Posts tagged: &quot;{originalTag}&quot;
           </h1>
           <p className="mb-12 text-muted-foreground">
             {posts.length} article{posts.length === 1 ? "" : "s"} found for this

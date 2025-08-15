@@ -55,7 +55,7 @@ const itemVariant = {
   },
 };
 
-const iconMap: { [key: string]: React.ElementType } = {
+const iconMap: Record<string, React.ElementType> = {
   Linkedin,
   Palette,
   Twitter,
@@ -75,7 +75,7 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(_values: z.infer<typeof formSchema>) {
     toast({
       title: "Message Sent! ✨",
       description: "Thanks for reaching out. I'll get back to you soon.",

@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -8,11 +7,6 @@ import { MotionDiv } from "@/components/blog/Motion";
 import Link from "next/link";
 import { siteConfig } from "@/content/config";
 import { format } from "date-fns";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode from "rehype-pretty-code";
-import { useMDXComponents } from "../../../../mdx-components";
 import { slugify } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -31,7 +25,15 @@ import { Suspense } from "react";
 import Sidebar from "@/components/blog/Sidebar";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-const iconMap: { [key: string]: React.ElementType } = {
+const MdxContent = dynamic(
+  () => import("@/components/blog/MdxContent").then((mod) => mod.MdxContent),
+  {
+    ssr: false,
+    loading: () => <Skeleton className="h-64 w-full" />, // Optional: Add a loading skeleton
+  }
+);
+
+const iconMap: Record<string, React.ElementType> = {
   Linkedin,
   Twitter,
   Facebook,
@@ -51,7 +53,7 @@ const CommentFormLoader = () => (
   </div>
 );
 
-const CommentsSectionLoader = () => (
+const CommentsSectionLoader = () => ( // eslint-disable-line @typescript-eslint/no-unused-vars
   <div className="mt-12">
     <Skeleton className="h-7 w-40 mb-6" />
     <div className="space-y-8">
@@ -73,6 +75,7 @@ const CommentsSectionLoader = () => (
 
 const CommentForm = dynamic(() => import("@/components/blog/CommentForm"), {
   loading: () => <CommentFormLoader />,
+  ssr: false,
 });
 
 import CommentsSection from "@/components/blog/CommentsSection";
@@ -161,7 +164,6 @@ export default async function BlogPostPage({
   params: { slug: string };
 }) {
   const post = await getPostBySlug(params.slug);
-  const components = useMDXComponents({});
 
   if (!post) {
     notFound();
@@ -274,22 +276,7 @@ export default async function BlogPostPage({
                 />
               </MotionDiv>
 
-              <div className="prose prose-invert max-w-none text-base lg:text-lg text-muted-foreground">
-                <MDXRemote
-                  source={content}
-                  components={components}
-                  options={{
-                    mdxOptions: {
-                      remarkPlugins: [remarkGfm],
-                      rehypePlugins: [
-                        rehypeSlug,
-                        [rehypeAutolinkHeadings, { behavior: "wrap" }],
-                        [rehypePrettyCode, { theme: "one-dark-pro" }],
-                      ],
-                    },
-                  }}
-                />
-              </div>
+              <MdxContent content={content} />
 
               <Separator className="my-8" />
 

@@ -9,11 +9,11 @@ import { Suspense } from "react";
 import Sidebar from "@/components/blog/Sidebar";
 import { SidebarLoader } from "@/components/blog/SidebarLoader";
 
-type CategoryPageProps = {
+interface CategoryPageProps {
   params: {
     category: string;
   };
-};
+}
 
 const containerVariant = {
   hidden: { opacity: 0 },
@@ -55,8 +55,8 @@ export async function generateMetadata({
     return {};
   }
 
-  const title = `Posts in category: "${originalCategory}"`;
-  const description = `Browse all articles filed under the category ${originalCategory} on ${siteConfig.author.name}'s blog.`;
+  const title = `Posts in category: &quot;${originalCategory}&quot;`;
+  const description = `Browse all articles filed under the category ${originalCategory} on ${siteConfig.author.name}&apos;s blog.`;
 
   return {
     title,
@@ -98,7 +98,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           viewport={{ once: true, amount: 0.5 }}
         >
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight">
-            Posts in category: "{originalCategory}"
+            Posts in category: &quot;{originalCategory}&quot;
           </h1>
           <p className="mb-12 text-muted-foreground">
             {posts.length} article{posts.length === 1 ? "" : "s"} found in this

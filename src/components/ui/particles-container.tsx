@@ -16,7 +16,9 @@ export const ParticlesContainer = () => {
     });
   }, []);
 
-  const particlesLoaded = async (container?: Container): Promise<void> => {};
+  const particlesLoaded = async (_container?: Container): Promise<void> => {
+    // Intentionally empty, as no specific action is needed when particles are loaded.
+  };
 
   const options: ISourceOptions = useMemo(
     () => ({

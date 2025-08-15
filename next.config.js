@@ -1,30 +1,16 @@
-const createMDX = require("@next/mdx");
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-  openAnalyzer: false,
-});
+import createMDX from "@next/mdx";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "img-c.udemycdn.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.shutterstock.com",
-        port: "",
-        pathname: "/**",
-      },
-    ],
-  },
+  output: 'export',
 };
 
 const withMDX = createMDX({});
 
-module.exports = withBundleAnalyzer(withMDX(nextConfig));
+const bundleAnalyzerConfig = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: false,
+});
+
+export default bundleAnalyzerConfig(withMDX(nextConfig));

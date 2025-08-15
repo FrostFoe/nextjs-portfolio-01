@@ -45,7 +45,7 @@ export const siteConfig = {
         secondary: { text: "Subscribe", url: "/#newsletter" },
       },
       image: {
-        src: "https://img-c.udemycdn.com/course/750x422/4486772_7ce3_7.jpg",
+        src: "/images/udemy/udemy-course-4486772_7ce3_7.jpg",
         alt: "Hero Image",
         hint: "abstract design illustration",
       },
@@ -77,7 +77,7 @@ export const siteConfig = {
       ],
       buttonText: "Start Collaborating!",
       image: {
-        src: "https://img-c.udemycdn.com/course/750x422/4486772_7ce3_7.jpg",
+        src: "/images/udemy/udemy-course-4486772_7ce3_7.jpg",
         alt: "Cute robot mascot",
         hint: "cute robot street",
       },

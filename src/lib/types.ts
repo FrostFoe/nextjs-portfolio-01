@@ -1,21 +1,21 @@
-export type Reply = {
+export interface Reply {
   id: string;
   author: string;
   avatarUrl: string;
   date: string;
   text: string;
-};
+}
 
-export type Comment = {
+export interface Comment {
   id: string;
   author: string;
   avatarUrl: string;
   date: string;
   text: string;
   reply?: Reply;
-};
+}
 
-export type PostFrontmatter = {
+export interface PostFrontmatter {
   title: string;
   date: string;
   description: string;
@@ -26,10 +26,10 @@ export type PostFrontmatter = {
   tags: string[];
   readingTime: string;
   comments?: boolean;
-};
+}
 
-export type Post = {
+export interface Post {
   slug: string;
   frontmatter: PostFrontmatter;
   content: string;
-};
+}
